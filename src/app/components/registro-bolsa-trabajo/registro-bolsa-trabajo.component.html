@@ -1,0 +1,102 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-lg-10 col-md-10 container-fluid">
+
+            <div class="formulario mt-5">
+                <form id="bolsaTrabajoExt" method="post">
+                    <div class="card card-primary">
+                        <div class="card-header bg-success">
+                            <h4 class="card-title text-center text-white">{{titulo}}</h4>
+                        </div>
+
+                        <div class="row px-5 pb-3 pt-2">
+                            <!-- <input type="hidden" th:field="*{id}"> -->
+                            <input type="hidden"> <!-- Id del empleado -->
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2 text-center black">
+                                <label>RFC:</label>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2" id="grupo__rfc">
+                                <input type="text" class="form-control" placeholder="Ingrese el RFC" id="rfc" name="rfc" maxlength="13">
+                                <!-- <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('rfc')}" th:errors="*{rfc}">
+                                </div> -->
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2 text-center black">
+                                <label>Nombre(s):</label>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2">
+                                <input type="text" class="form-control" placeholder="Ingrese el nombre" id="nombre" name="nombre" required>
+                                <!-- <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('nombre')}"
+                                    th:errors="*{nombre}"></div> -->
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2 text-center black">
+                                <label>Apellido Paterno:</label>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2">
+                                <input type="text" class="form-control" placeholder="Ingrese el apellido paterno" id="apellidoPat"
+                                    name="apellidoPat" required>
+                                <!-- <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('apellidoPat')}"
+                                    th:errors="*{apellidoPat}">
+                                </div> -->
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2 text-center black">
+                                <label>Apellido Materno:</label>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2">
+                                <input type="text" class="form-control" placeholder="Ingrese el apellido materno" id="apellidoMat"
+                                    name="apellidoMat" required>
+                                <!-- <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('apellidoMat')}"
+                                    th:errors="*{apellidoMat}">
+                                </div> -->
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2 text-center black">
+                                <label>División geográfica:</label>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2">
+                                <select class="form-select" id="id_div_geografica" name="id_div_geografica"
+                                    aria-label="Default select example" style=" width:100%">
+                                    <option value="0">Seleccione una opcion</option>
+                                    <!-- <option th:each="del : ${delegaciones}" th:value="${del.divGeo}" th:text="${del.nombre}">
+                                    </option> -->
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <!-- <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('id_div_geografica')}"
+                                    th:errors="*{id_div_geografica}"></div> -->
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2 text-center black">
+                                <label>Centro de trabajo:</label>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 mt-3 mb-2">
+                                <select class="form-select black" id="id_centro_trabajo" name="id_centro_trabajo"
+                                    aria-label="Default select example" style=" width:100%">
+                                    <option value="0">Seleccione una opcion</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <!-- <option th:each="adsc : ${adscripciones}" th:value="${adsc.clave}"
+                                        th:text="${adsc.clave + '-' + adsc.descripcion}" class="black">
+                                    </option> -->
+                                </select>
+                                <!-- <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('id_centro_trabajo')}"
+                                    th:errors="*{id_centro_trabajo}"></div> -->
+                            </div>
+
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4 text-center mt-5 mb-3">
+                                <!-- <button type="submit" id="btnAgregarBolsaTrab" class="btn btn-block issste text-white">Guardar registro</button> -->
+                                <input type="submit" id="btnAgregarBolsaTrab" class="btn btn-block btn-success"
+                                    value="Guardar registro">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

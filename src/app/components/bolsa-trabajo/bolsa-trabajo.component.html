@@ -1,0 +1,93 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-lg-2">
+      <app-menu></app-menu>
+    </div>
+    <div class="col-lg-10 col-md-12 container-fluid">
+      <!-- <div class="alert alert-success">
+        <h1 class="text-center display-4">GYS Bolsa de trabajo</h1>
+      </div> -->
+
+      <div class="table-responsive">
+
+        <!-- Tabla -->
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+          <thead class="text-center">
+            <tr>
+              <th>Id</th>
+              <th>RFC</th>
+              <th>Nombre</th>
+              <th>Apellido Paterno</th>
+              <th>Apellido Materno</th>
+              <th>Div. Geo</th>
+              <th>ID Centro Trab</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-active text-center" *ngFor="let reg of data;">
+              <!-- <td>{{i+1}}</td> -->
+              <td>{{reg.id}}</td>
+              <td>{{reg.rfc}}</td>
+              <td>{{reg.nombre}}</td>
+              <td>{{reg.apellidoPat}}</td>
+              <td>{{reg.apellidoMat}}</td>
+              <td>{{reg.id_div_geografica}}</td>
+              <td>{{reg.id_centro_trabajo}}</td>
+              <td> <a [routerLink]="['/']" class="btn btn-warning">Editar</a> </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="container-fluid">
+
+    <div class="alert alert-success">
+        <h1 class="text-center display-4">GYS Bolsa de trabajo</h1> 
+    </div>
+
+    <div class="container mt-5">
+
+        Tabla
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+            <thead class="text-center">
+                <tr>
+                    <th>Id</th>
+                    <th>RFC</th>
+                    <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Div. Geo</th>
+                    <th>ID Centro Trab</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr class="table-active text-center" *ngFor="let reg of data;">
+                <td>{{i+1}}</td>
+                <td>{{reg.id}}</td>
+                <td>{{reg.rfc}}</td>
+                <td>{{reg.nombre}}</td>
+                <td>{{reg.apellidoPat}}</td>
+                <td>{{reg.apellidoMat}}</td>
+                <td>{{reg.id_div_geografica}}</td>
+                <td>{{reg.id_centro_trabajo}}</td> 
+                <td> <a [routerLink]="['/']" class="btn btn-warning">Editar</a> </td>
+            </tr>
+
+            </tbody>
+        </table>
+        <br>
+
+
+    </div>
+</div> -->
