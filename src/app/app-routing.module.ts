@@ -4,12 +4,15 @@ import { BolsaTrabajoComponent } from './components/bolsa-trabajo/bolsa-trabajo.
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroBolsaTrabajoComponent } from './components/registro-bolsa-trabajo/registro-bolsa-trabajo.component';
+import { RegistroGuardiasComponent } from './components/registro-guardias/registro-guardias.component';
 
 const routes: Routes = [
   {path:'auth', component:LoginComponent},
   {path: '', component:BolsaTrabajoComponent},
   {path:'home',component:HomeComponent},
   {path:'bolsa-trabajo', component:RegistroBolsaTrabajoComponent},
+  {path:'registro-guardia', component:RegistroGuardiasComponent},
+  {path:'**', redirectTo:'home'}
 ];
 
 @NgModule({

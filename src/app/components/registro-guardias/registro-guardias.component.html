@@ -1,0 +1,382 @@
+<!-- <p>registro-guardias works!</p> -->
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-lg-10 col-md-10 container-fluid">
+            <h2 class="text-center black mt-3">Registro de guardias</h2>
+            <div class="row mt-3">
+                <!-- Columna 1 -->
+                <div class="col-md-12 col-sm-12 col-lg-4 mt-3">
+                    <div class="card card-primary">
+                        <div class="card-header issste-v">
+                            <h4 class="card-title text-center text-white">Criterios de consulta</h4>
+                        </div>
+                        <!-- Cards interna y externa -->
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="interno-tab" data-bs-toggle="tab"
+                                            data-bs-target="#interno" type="button" role="tab"
+                                            aria-controls="interno">Interno</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="externo-tab" data-bs-toggle="tab"
+                                            data-bs-target="#externo" type="button" role="tab"
+                                            aria-controls="externo">Externo</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-content card-body" id="myTabContent">
+                                <!-- Card interno -->
+                                <div id="interno" class="tab-pane fade show active" role="tabpanel"
+                                    aria-labelledby="interno-tab">
+                                    <div class="busqueda">
+                                        <!-- <form action="" method="post"> -->
+                                        <form action="">  
+                                            <div class="row">
+                                                <div class="col-md-3 col-lg-6 col-xl-3">
+                                                    <label for="txtNumero"><strong>Empleado:</strong></label>
+                                                </div>
+                                                <div class="col-md-5 col-lg-6 col-xl-5 mb-2">
+                                                    <input type="text" id="txtNumero" name="numEmp" class="form-control text-center" 
+                                                        placeholder="Introduce número" required>
+                                                </div>
+                                                <div class="col-md-4 col-xl-4 text-center">
+                                                    <input type="submit" id="consultarEmpInt" class="btn btn-success text-white"
+                                                        value="Consultar">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- </form> -->
+                                    </div>
+                                    <hr>
+                                    <div class="informacion-int">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label class="fw-bold"><strong>Nombre(s):</strong></label>
+                                            </div>
+                                            <div class="col-md-8 mb-3">
+                                                <span id="nombresInt" class="nombre"></span>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label class="fw-bold"><strong>Apellidos:</strong></label>
+                                            </div>
+                                            <div class="col-md-8 mb-3">
+                                                <span id="apellidosInt" class="nombre"></span>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label class="fw-bold"><strong>RFC:</strong></label>
+                                            </div>
+                                            <div class="col-md-8 mb-3">
+                                                <span id="rfcInt" class="nombre"></span>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label class="fw-bold"><strong>Adscripción:</strong></label>
+                                            </div>
+                                            <div class="col-md-8 mb-2">
+                                                <span id="adscripcionInt" class="nombre"></span>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label class="fw-bold"><strong>Servicio:</strong></label>
+                                            </div>
+                                            <div class="col-md-8 mb-2">
+                                                <span id="servicioInt" class="nombre"></span>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label class="fw-bold"><strong>Puesto:</strong></label>
+                                            </div>
+                                            <div class="col-md-8 mb-2">
+                                                <span id="puestoInt" class="nombre"></span>
+                                            </div>
+                                            <!-- 
+                                                    <div class="col-md-4 mb-2">
+                                                        <label class="fw-bold"><strong>Horario:</strong></label>
+                                                    </div>
+                                                    <div class="col-md-8 mb-2">
+                                                        <span id="horarioInt" class="nombre"></span>
+                                                    </div>
+                                                    -->
+                                            <div class="col-md-4 mb-2">
+                                                <label class="fw-bold"><strong>Nivel:</strong></label>
+                                            </div>
+                                            <div class="col-md-8 mb-2">
+                                                <span id="nivelInt" class="nombre"></span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="fw-bold"><strong>Tipo Jornada:</strong></label>
+                                            </div>
+                                            <div class="col-md-8 mb-2">
+                                                <span id="horasInt" class="nombre"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fin de interno -->
+
+                                <!-- Card Externo -->
+                                <div id="externo" class="tab-pane fade show" role="tabpanel"
+                                    aria-labelledby="externo-tab">
+                                    <div class="busqueda">
+                                        <form action="" method="post">
+                                            <div class="row">
+                                                <div class="col-md-3 col-lg-6 col-xl-2 col-sm-12">
+                                                    <label for="txtRFC"><strong>RFC:</strong></label>
+                                                </div>
+                                                <div class="col-md-5 col-lg-6 col-xl-6 col-sm-12">
+                                                    <input type="text" id="txtRFC" name="rfcExt"
+                                                        class="form-control text-center mb-2"
+                                                        onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                                        placeholder="Introducir RFC" autocomplete="off" required>
+                                                </div>
+                                                <div class="col-md-4 col-xl-4 col-sm-12">
+                                                    <input type="submit" id="consultaRFCExt" class="btn btn-success issste text-white"
+                                                        value="Consultar">
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <hr>
+                                    <div class="informacion-ext">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Nombre:</label>
+                                            </div>
+                                            <div class="col-md-9 mb-3">
+                                                <span id="nombreExt"></span>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!-- Formulario de externos -->
+                                        <form action="" method="post">
+                                            <div class="row">
+                                                <div class="col-lg-4 mb-3">
+                                                    <label id="adscripcionExt"><strong>Adscripción</strong></label>
+                                                </div>
+                                                <div class="col-lg-8 mb-3">
+                                                    <select class="form-control" id="ddlAscripcion" name="ascripcionExt"
+                                                        style=" width:100%" aria-label="Default select example">
+                                                        <option value="0" selected>Seleccione una opcion
+                                                        </option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <!-- <option th:each="adsc : ${adscripciones}"
+                                                                    th:value="${adsc.clave + ';;;' + adsc.tipo + ';;;' + adsc.zona}"
+                                                                    th:text="${adsc.clave + '-' + adsc.descripcion}">
+                                                                </option> -->
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-4 mb-3">
+                                                    <label id="puestoExterno"><strong>Puesto</strong></label>
+                                                </div>
+                                                <div class="col-lg-8 mb-3">
+                                                    <select class="form-control" id="ddlPuesto" name="puestoExt"
+                                                        style=" width:100%" aria-label="Default select example">
+                                                        <option value="0" selected>Seleccione una opcion
+                                                        </option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <!-- <option th:each="puesto : ${puestos}"
+                                                                    th:value="${puesto.clave + ';;;' + puesto.tipotabulador}"
+                                                                    th:text="${puesto.clave + '-' + puesto.descripcion}">
+                                                                </option> -->
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-4 mb-3">
+                                                    <label id="servicioExterno"><strong>Servicio</strong></label>
+                                                </div>
+                                                <div class="col-lg-8 mb-3">
+                                                    <select class="form-control" id="ddlServicio" name="servicioExt"
+                                                        style=" width:100%" aria-label="Default select example">
+                                                        <option value="0" selected>Seleccione una opcion
+                                                        </option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <!-- <option th:each="servicio : ${servicios}"
+                                                                    th:value="${servicio.clave}"
+                                                                    th:text="${servicio.clave + '-' + servicio.descripcion}">
+                                                                </option> -->
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-4 mb-3">
+                                                    <label><strong>Nivel/Subnivel</strong></label>
+                                                </div>
+                                                <div class="col-lg-8 mb-3">
+                                                    <select class="form-control" id="ddlNivel" name="nivelExt"
+                                                        style=" width:100%" aria-label="Default select example">
+                                                        <option value="0" selected>Seleccione una opcion
+                                                        </option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <!-- <option th:each="nivel : ${niveles}"
+                                                                    th:value="${nivel.nivel+nivel.subnivel}"
+                                                                    th:text="${nivel.nivel + '/' + nivel.subnivel}">
+                                                                </option> -->
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-4 mb-3">
+                                                    <label id="tipoJornadaExt"><strong>Tipo
+                                                            de jornada</strong></label>
+                                                </div>
+                                                <div class="col-lg-8 mb-3">
+                                                    <select class="form-control" id="ddlJornada" name="jornadaExt"
+                                                        style=" width:100%" aria-label="Default select example">
+                                                        <option value="0" selected>Seleccione una opcion
+                                                        </option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <!-- <option th:each="jornada : ${jornadas}"
+                                                                    th:value="${jornada.clave}"
+                                                                    th:text="${jornada.clave + '-' + jornada.descripcion}">
+                                                                </option> -->
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <button type="submit" id="btnValidaPuesto"
+                                                        class="btn btn-success issste text-white">Validar puesto</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Fin de externo -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 2 -->
+                <div class="col-md-12 col-sm-12 col-lg-8 mt-3">
+                    <div class="agregar">
+                        <div class="card card-primary">
+                            <div class="card-header issste-v">
+                                <h4 class="card-title text-center text-white">Criterios de la guardia</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <form action="" method="post">
+                                    <div class="row mt-3">
+                                        <!-- Folio -->
+                                        <div class="col-md-6">
+                                            <label>Folio de
+                                                autorización:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="txtFolio" name="folioAuth" class="form-control"
+                                                placeholder="Introducir Folio..." required>
+                                        </div>
+                                        <!-- Fecha de inicio y fin -->
+                                        <div class="col-xl-2 col-sm-6 mt-3 mb-3">
+                                            <label>Fecha de inicio:</label>
+                                        </div>
+                                        <div class="col-xl-4 col-sm-6 mt-3 mb-3">
+                                            <input type="date" id="txtFechaInicio" name="fechaInicio">
+                                        </div>
+                                        <div class="col-xl-2 col-sm-6 mt-3 mb-3">
+                                            <label>Fecha fin:</label>
+                                        </div>
+                                        <div class="col-xl-4 col-sm-6 mt-3 mb-3">
+                                            <input type="date" id="txtFechaFin" name="fechaFin">
+                                        </div>
+                                        <!-- Movimiento -->
+                                        <div class="col-md-6 mb-3">
+                                            <label>Movimiento:</label>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <select class="form-control" id="ddlMovimiento" name="movimiento"
+                                                aria-label="Default select example">
+                                                <option selected disabled>Seleccione una opcion</option>
+                                                <option value="06">NOCTURNA</option>
+                                                <option value="07">DOMINICAL Y SABATINA,11 HORAS Y 24 HORAS
+                                                </option>
+                                                <option value="08">GUARDIAS PARA TRANSPORTES</option>
+                                                <option value="09">PERSONAL ADMINISTRATIVO</option>
+                                            </select>
+                                        </div>
+                                        <!-- Motivo -->
+                                        <div class="col-md-6 mb-3">
+                                            <label>Motivo:</label>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <select class="form-control" id="ddlMotivo" name="motivo"
+                                                aria-label="Default select example">
+                                                <option selected disabled>Seleccione una opcion</option>
+                                                <option value="G1">G1 POR CONTINUIDAD EN EL SERVICIO</option>
+                                                <option value="G2">G2 CARACTERISTICAS DEL SERVICIO</option>
+                                            </select>
+                                        </div>
+                                        <!-- Riesgos profesionales -->
+                                        <div class="col-md-6 mb-3">
+                                            <label>Riesgos
+                                                profesionales:</label>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <select class="form-control" id="ddlRiesgos" name="riesgosProf"
+                                                aria-label="Default select example">
+                                                <option selected disabled>Seleccione una opcion</option>
+                                                <option value="&">&</option>
+                                                <option value="*">*</option>
+                                            </select>
+                                        </div>
+                                        <!-- Dias/horas -->
+                                        <div class="col-md-6 mb-3">
+                                            <label>Dias/Horas:</label>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <input type="text" id="txtDias" name="diasHoras"
+                                                placeholder="Introduzca los dias/horas" class="form-control" required>
+                                        </div>
+                                        <!-- Comentarios -->
+                                        <div class="col-md-6 mb-3">
+                                            <label>Comentarios:</label>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <textarea id="txtComentarios" name="comentarios" rows="4"
+                                                placeholder="Comentarios..." required></textarea>
+                                        </div>
+                                        <!-- Quincena -->
+                                        <div class="col-md-6 mb-3">
+                                            <label>Quincena:</label>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <select class="form-control" id="ddlQuincena" name="quincena"
+                                                aria-label="Default select example">
+                                                <option selected disabled>Seleccione una opcion</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <!-- <option th:each="paga : ${pagas}" th:value="${paga.fecha}"
+                                                            th:text="${paga.fecha + '-' + paga.descripcion}"></option>
+                                                        <option value="31/03/2022">QUINCENA 06 DEL 2022</option> -->
+                                            </select>
+                                        </div>
+                                        <!-- Boton de agregar guardia -->
+                                        <div class="col-md-12">
+                                            <button type="submit" id="btnAgregarGuardia"
+                                                class="btn btn-success issste text-white btn-block" disabled>Agregar
+                                                Guardia</button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="hdnTipoCT" />
+                                    <input type="hidden" id="hdnTabulador" />
+                                    <input type="hidden" id="hdnZona" />
+                                    <input type="hidden" id="hdnUserName" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
