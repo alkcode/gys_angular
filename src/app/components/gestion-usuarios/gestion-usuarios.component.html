@@ -13,23 +13,48 @@
                     <label class="text-center">1.Datos de usuario</label>
                 </div>
                 <!-- Datos -->
-                <div class="col-lg-6">
-                    <form>
+                <div class="col-lg-6 mb-3">
+                    <form [formGroup]="formUsuario">
                         <div class="col-lg-9 col-md-12 mb-3">
-                            <input class="form-control" type="text" id="clave" name="clave" placeholder="Clave">
+                            <input class="form-control" type="text" id="clave" name="clave" formControlName="clave" placeholder="Clave">
+                        </div>
+                        
+                        <div class="col-lg-9 col-md-12 mb-1">
+                            <input class="form-control" [type]="mostrarContrasena ? 'text' : 'password'" id="contrasena" name="contrasena" formControlName="contrasena" placeholder="Contraseña">
+                        </div>
+                        <div class="col-lg-12 col-md-12 mb-4">
+                            <div class="form-check">
+                                <input (click)="cambiarContrasena()" class="form-check-input" type="checkbox" id="contrasenacheck">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Mostrar contraseña
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-9 col-md-12 mb-1">
+                            <input class="form-control" [type]="mostrarContrasena2 ? 'text' : 'password'" id="contrasena2" name="contrasena2" formControlName="contrasena2" placeholder="Confirmar contraseña">
+                        </div>
+                        <div class="col-lg-12 col-md-12 mb-4">
+                            <div class="form-check">
+                                <input (click)="cambiarContrasena2()" class="form-check-input" type="checkbox" value="" id="contrasena2check">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Mostrar contraseña
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-9 col-md-12 mb-3">
+                            <input class="form-control" type="text" id="empleado" name="empleado" formControlName="empleado" placeholder="Empleado">
                         </div>
                         <div class="col-lg-9 col-md-12 mb-3">
-                            <input class="form-control" type="text" id="contraseña" name="contraseña" placeholder="Contraseña">
-                        </div>
-                        <div class="col-lg-9 col-md-12 mb-3">
-                            <input class="form-control" type="text" id="contraseña2" name="contraseña2" placeholder="Confirmar contraseña">
-                        </div>
-                        <div class="col-lg-9 col-md-12 mb-3">
-                            <input class="form-control" type="text" id="empleado" name="empleado" placeholder="Empleado">
+                            <select class="form-select" formControlName="perfil" aria-label="Default select example">
+                                <option [ngValue]="null" disabled class="text-center">Asigne un perfil</option>
+                                <option *ngFor="let per of perfiles" [ngValue]="per">{{per.nombre}}</option>
+                            </select>
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-3 mt-5 mb-3">
+                <div class="col-lg-3">
                     <div class="mb-3">
                         <label>Buscar usuario registrado:</label>
                     </div>
@@ -38,8 +63,18 @@
                     </div>
                 </div>
             </div>
+            <!-- {{formUsuario.value | json}} -->
             <hr>
-            <app-gestion-guardias></app-gestion-guardias>
+            <div *ngIf="formUsuario.valid">
+                <app-gestion-guardias
+                    [clave]="formUsuario.value.clave"
+                    [contrasena]="formUsuario.value.contrasena"
+                    [contrasena2]="formUsuario.value.contrasena2"
+                    [nombre]="formUsuario.value.empleado"
+                    [perfil]="formUsuario.value.perfil.nombre"
+                    ></app-gestion-guardias>
+            </div>
+            
         </div>
     </div>
 </div>
