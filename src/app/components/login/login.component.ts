@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/interfaces/usuario';
 
 
@@ -9,17 +9,24 @@ import { Usuario } from 'src/app/interfaces/usuario';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  formularioLogin: FormGroup = new FormGroup({});
   usuario='';
   password='';
 
-  usuarioLogin= new Usuario("","");
+  // usuarioLogin= new Usuario("","");
 
   constructor() { }
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.formularioLogin = new FormGroup({
+      usuario: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    })
+  }
 
   formularioEnviado(){
-    console.log(this.usuarioLogin);
+    const body = this.formularioLogin.value;
+    console.log(body);
   }
   
 }

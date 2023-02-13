@@ -16,6 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroBolsaTrabajoComponent } from './components/registro-bolsa-trabajo/registro-bolsa-trabajo.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistroGuardiasComponent } from './components/registro-guardias/registro-guardias.component';
+import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
+import { GestionGuardiasComponent } from './components/gestion-guardias/gestion-guardias.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { RegistroGuardiasComponent } from './components/registro-guardias/regist
     HomeComponent,
     LoginComponent,
     RegistroBolsaTrabajoComponent,
-    RegistroGuardiasComponent
+    RegistroGuardiasComponent,
+    GestionUsuariosComponent,
+    GestionGuardiasComponent
   ],
   imports: [
     BrowserModule,

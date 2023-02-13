@@ -1,0 +1,45 @@
+<!-- <p>gestion-usuarios works!</p> -->
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-lg-10 col-md-10 container-fluid mt-5">
+            <h1 class="text-center">Gestion de usuarios</h1>
+            <div class="row mt-5">
+                <div class="col-lg-3">
+                    <label class="text-center">1.Datos de usuario</label>
+                </div>
+                <!-- Datos -->
+                <div class="col-lg-6">
+                    <form>
+                        <div class="col-lg-9 col-md-12 mb-3">
+                            <input class="form-control" type="text" id="clave" name="clave" placeholder="Clave">
+                        </div>
+                        <div class="col-lg-9 col-md-12 mb-3">
+                            <input class="form-control" type="text" id="contraseña" name="contraseña" placeholder="Contraseña">
+                        </div>
+                        <div class="col-lg-9 col-md-12 mb-3">
+                            <input class="form-control" type="text" id="contraseña2" name="contraseña2" placeholder="Confirmar contraseña">
+                        </div>
+                        <div class="col-lg-9 col-md-12 mb-3">
+                            <input class="form-control" type="text" id="empleado" name="empleado" placeholder="Empleado">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3 mt-5 mb-3">
+                    <div class="mb-3">
+                        <label>Buscar usuario registrado:</label>
+                    </div>
+                    <div class="col-xl-10 col-md-6 col-sm-6">
+                        <input class="form-control" type="text" id="buscarUsuario" name="buscarUsuario" placeholder="Buscar...">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <app-gestion-guardias></app-gestion-guardias>
+        </div>
+    </div>
+</div>

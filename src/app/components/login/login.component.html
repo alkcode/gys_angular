@@ -14,15 +14,16 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Acceso</h1>
                                     </div>
-                                    <form class="user" #formularioUsuario="ngForm" (ngSubmit)="formularioEnviado()">
+                                    <form class="user" [formGroup]="formularioLogin" (ngSubmit)="formularioEnviado()">
                                         <div class="form-group mb-3">
                                             <input type="text" class="form-control form-control-user"
-                                                name="usuario" [(ngModel)]="usuarioLogin.usuario"
+                                                name="usuario" formControlName="usuario"
                                                 placeholder="Ingrese su usuario">
                                         </div>
+                                        <!-- <span class="text-muted" *ngIf="formularioLogin.get('usuario')?.hasError && formularioLogin.get('usuario')?.touched">Usuario required</span> -->
                                         <div class="form-group mb-3">
                                             <input type="password" class="form-control form-control-user"
-                                                name="password" [(ngModel)]="usuarioLogin.password" placeholder="Contraseña">
+                                                name="password" formControlName="password" placeholder="Contraseña">
                                         </div>
 
                                         <div class="d-grid gap-2">
@@ -42,6 +43,5 @@
     </div>
 
     <h2>Depurando usuario:</h2>
-{{ usuarioLogin | json }}
-    <!-- <br><br><br><br><br><br><br><br><br><br><br> -->
+    Raw:{{formularioLogin.value | json}}
 </div>
