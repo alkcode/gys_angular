@@ -1,6 +1,4 @@
-export class Usuario {
-    constructor(
-          public usuario: string,
-          public password: string
-      ) { }
-  }
+export interface Usuario {
+    usuario: String;
+    contrasena: String;
+}

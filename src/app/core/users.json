@@ -1,0 +1,10 @@
+{
+    "userFail": {
+        "usuario": "0x0x0x0x0x0",
+        "password": "------------"
+    },
+    "userOk": {
+        "usuario": "mclr",
+        "password": "123456"
+    }
+}

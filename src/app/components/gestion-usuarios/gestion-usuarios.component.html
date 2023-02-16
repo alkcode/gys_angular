@@ -42,6 +42,9 @@
                                 </label>
                             </div>
                         </div>
+                        <div *ngIf="formUsuario.errors?.['validarPassword'] && getControl('contrasena2')?.touched">
+                            Constaeñas no coinciden
+                        </div>
 
                         <div class="col-lg-9 col-md-12 mb-3">
                             <input class="form-control" type="text" id="empleado" name="empleado" formControlName="empleado" placeholder="Empleado">
@@ -49,7 +52,7 @@
                         <div class="col-lg-9 col-md-12 mb-3">
                             <select class="form-select" formControlName="perfil" aria-label="Default select example">
                                 <option [ngValue]="null" disabled class="text-center">Asigne un perfil</option>
-                                <option *ngFor="let per of perfiles" [ngValue]="per">{{per.nombre}}</option>
+                                <option *ngFor="let per of listaPerfiles" [ngValue]="per">{{per.descripcion}}</option>
                             </select>
                         </div>
                     </form>
@@ -63,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <!-- {{formUsuario.value | json}} -->
+            {{formUsuario.value | json}}
             <hr>
             <div *ngIf="formUsuario.valid">
                 <app-gestion-guardias
@@ -71,7 +74,8 @@
                     [contrasena]="formUsuario.value.contrasena"
                     [contrasena2]="formUsuario.value.contrasena2"
                     [nombre]="formUsuario.value.empleado"
-                    [perfil]="formUsuario.value.perfil.nombre"
+                    [idPerfil]="formUsuario.value.perfil.idPerfil"
+                    [perfil]="formUsuario.value.perfil.descripcion"
                     ></app-gestion-guardias>
             </div>
             

@@ -18,6 +18,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistroGuardiasComponent } from './components/registro-guardias/registro-guardias.component';
 import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 import { GestionGuardiasComponent } from './components/gestion-guardias/gestion-guardias.component';
+import { ObjToArrayPipe } from './pipe/obj-to-array.pipe';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { GestionGuardiasComponent } from './components/gestion-guardias/gestion-
     RegistroBolsaTrabajoComponent,
     RegistroGuardiasComponent,
     GestionUsuariosComponent,
-    GestionGuardiasComponent
+    GestionGuardiasComponent,
+    ObjToArrayPipe
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { GestionGuardiasComponent } from './components/gestion-guardias/gestion-
     ReactiveFormsModule,
     HttpClientModule,
     DataTablesModule,
-    NgbModule
+    NgbModule,
+    CommonModule
   ],
   exports:[
     HeaderComponent,

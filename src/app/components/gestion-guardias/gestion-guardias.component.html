@@ -1,11 +1,53 @@
 <!-- <p>gestion-guardias works!</p> -->
-<h1 class="text-center">Gestion de guardias</h1>
-<form>
+<h1 class="text-center">{{perfil}}</h1>
+<form [formGroup]="formPerfil">
     <div class="row mt-5">
         <div class="col-md-12">
             <div class="col-lg-12 col-md-10 col-sm-12 mt-3 mb-3">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div *ngFor="let perfil of perfiles">
+                    <!-- <div *ngFor="let opcion of perfil.opciones"> -->
+                    <div>
+                        <div class="col-lg-4">
+                            <label>{{perfil.descripcion}}</label>
+                        </div>
+                        <div class="col-lg-2 col-md-3">
+                            <div class="form-check">
+                                <input (click)="permisoLectura()" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" formControlName="lectura">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Lectura
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-3">
+                            <div class="form-check">
+                                <input (click)="permisoActualizacion()" class="form-check-input" type="checkbox" value="2" id="flexCheckDefault" formControlName="actualizacion">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Actualización
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-3">
+                            <div class="form-check">
+                                <input (click)="permisoCreacion()" class="form-check-input" type="checkbox" value="4" id="flexCheckDefault" formControlName="creacion">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Creación
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-3">
+                            <div class="form-check">
+                                <input (click)="permisoEliminacion()" class="form-check-input" type="checkbox" value="8" id="flexCheckDefault" formControlName="eliminacion">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Eliminación
+                                </label>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                    </div>
+                    </div>
+                    <!-- <div class="col-lg-4">
                         <label>Registro de guardias</label>
                     </div>
                     <div class="col-lg-2 col-md-3">
@@ -39,9 +81,9 @@
                                 Eliminación
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Opcion 2 -->
-                    <div class="col-lg-4">
+                    <!-- <div class="col-lg-4">
                         <label>Consulta de guardias</label>
                     </div>
                     <div class="col-lg-2 col-md-3">
@@ -75,7 +117,7 @@
                                 Eliminación
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Boton de guardar -->
                     <div class="row mt-5">
                         <div class="col-lg-12 text-center ">
@@ -93,4 +135,11 @@
 {{contrasena}}
 {{contrasena2}}
 {{nombre}}
-{{perfil}} -->
+{{perfil}}
+
+<pre>
+    {{perfiles | json}}
+</pre> -->
+
+
+{{valorActualizacion+valorCreacion+valorEliminacion+valorLectura}}
