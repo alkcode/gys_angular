@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Perfiles } from '../interfaces/perfiles';
+import { Perfil } from '../interfaces/perfiles';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,9 @@ export class GestionGuardiasService {
 
   constructor(private http:HttpClient){}
 
-  mostrarPerfiles$(opcion:string):Observable<Perfiles[]>{
+  mostrarPerfiles$(opcion:string):Observable<Perfil>{
     // let headers = new HttpHeaders().set('access-control-allow-origin',"http://192.167.165.55:8081");
-    return this.http.get<Perfiles[]>(this.baseUrl+'perfiles/'+opcion+'?conOpciones=true')
+    return this.http.get<Perfil>(this.baseUrl+'perfiles/'+opcion+'?conOpciones=true')
     let okOpciones:boolean = true; 
 
   }

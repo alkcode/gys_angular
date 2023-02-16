@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Perfiles } from '../interfaces/perfiles';
+import { Perfil } from '../interfaces/perfiles';
 
 @Pipe({
   name: 'objToArray'
 })
 export class ObjToArrayPipe implements PipeTransform {
 
-  transform(object : Perfiles[] = []): any {
+  transform(object : Perfil): any {
     return Object.values(object);
   }
 

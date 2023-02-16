@@ -1,10 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { Perfiles } from '../../interfaces/perfiles';
+import { Perfil, PerfilClass, Usuario } from '../../interfaces/perfiles';
 import { GestionGuardiasService } from 'src/app/services/gestion-guardias.service';
 import { Observable, of } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-gestion-guardias',
@@ -13,12 +12,10 @@ import { CommonModule } from '@angular/common';
 })
 export class GestionGuardiasComponent{
 
-  @Input() clave='';
-  @Input() contrasena='';
-  @Input() contrasena2='';
-  @Input() nombre='';
-  @Input() perfil!: string;
-  @Input() idPerfil!: string;
+  @Input() usuario: any | undefined ;
+
+  // perfil: Perfil = []; 
+  perfil: Perfil = new PerfilClass;
 
   // Activador de los permisos
   actLectura: boolean = false;
@@ -31,33 +28,31 @@ export class GestionGuardiasComponent{
   valorCreacion:number=0;
   valorEliminacion:number=0;
 
-
-  perfiles: Perfiles[]=[];
-  // perfiles: Perfiles = {} as Perfiles;
-
+  // Inicializar formGroup para el formulario
   formPerfil: FormGroup = new FormGroup({});
 
-  // listaPerfiles$: Observable<Perfiles> = of({} as Perfiles);
 
   constructor(private gestionGuardiaService:GestionGuardiasService) {
-    this.idPerfil;
-    this.perfil;
    }
 
   ngOnInit(){
-    this.mostrarPerfiles(this.idPerfil);
+    
+    console.log(this.usuario);
+    
+    this.mostrarPerfiles(this.usuario.idPerfil);
     this.formularioPerfil();
+  
   }
 
-  mostrarPerfiles(opcion:string){
+  mostrarPerfiles(opcion:any){
     this.gestionGuardiaService.mostrarPerfiles$(opcion)
         .subscribe(data=>{
           // console.log(data);
           // this.perfiles = data;
-          this.perfiles = data;
-          console.log(this.perfiles);
-          console.log(this.perfiles[1]['descripcion']);
-          console.log(this.perfiles[0].descripcion);
+          this.perfil = data;
+          console.log(this.perfil);
+          console.log(this.perfil.opciones);
+          console.log(this.perfil.descripcion);
           
 
 
@@ -68,41 +63,41 @@ export class GestionGuardiasComponent{
     // this.listaPerfiles$ = this.gestionGuardiaService.mostrarPerfiles$(opcion);
 
   }
-
+// Formaulario
   formularioPerfil(){
     this.formPerfil= new FormGroup({
-      lectura: new FormControl(true),
+      lectura: new FormControl(false),
       actualizacion: new FormControl(false),
       creacion: new FormControl(false),
       eliminacion: new FormControl(false)
     });
   }
-
+// Checkbox para asignarle permisos por opcion
   permisoLectura(){
     this.actLectura = !this.actLectura;
     if(this.actLectura==true){
-      this.valorLectura=1;
+      this.valorLectura=1*(-1);
     }
   }
 
   permisoActualizacion(){
     this.actActualizacion = !this.actActualizacion;
     if(this.actActualizacion==true){
-      this.valorActualizacion=2;
+      this.valorActualizacion=2*(-1);
     }
   }
 
   permisoCreacion(){
     this.actCreacion = !this.actCreacion;
     if(this.actCreacion==true){
-      this.valorCreacion=4;
+      this.valorCreacion=4*(-1);
     }
   }
 
   permisoEliminacion(){
     this.actEliminacion = !this.actEliminacion;
     if(this.actEliminacion==true){
-      this.valorCreacion=8;
+      this.valorCreacion=8*(-1);
     }
   }
 }

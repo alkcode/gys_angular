@@ -84,4 +84,8 @@ export class GestionUsuariosComponent {
     return this.formUsuario.get(name);
   }
 
+  test(){
+    console.log(this.formUsuario.value.perfil.idPerfil);
+  }
+
 }
