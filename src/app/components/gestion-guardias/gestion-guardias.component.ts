@@ -57,8 +57,7 @@ export class GestionGuardiasComponent{
         .subscribe(data=>{
           this.perfil = data;
           console.log(this.perfil);
-          console.log(this.perfil.opciones);
-          console.log(this.perfil.descripcion);
+          console.log('Total opciones',this.perfil.opciones);
 
         },error=>{
           console.log(error);

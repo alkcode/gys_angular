@@ -21,7 +21,7 @@ export class GestionUsuariosService {
   }
 
 
-  getValidarEmpleado(id_empleado:string):Observable<Empleado> {
+  getValidarEmpleado(id_empleado:number):Observable<Empleado> {
     // return this.http.get<Empleado>(`${this.baseUrl}empleados/${id_empleado}`);
     return this.http.get<Empleado>(this.baseUrl+'empleados/'+id_empleado);
   }

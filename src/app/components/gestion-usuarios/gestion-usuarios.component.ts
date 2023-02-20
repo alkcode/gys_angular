@@ -35,27 +35,26 @@ export class GestionUsuariosComponent {
   constructor(private fb:FormBuilder,
               private gestionUsuarioService:GestionUsuariosService,
               private validators: ValidatorService
-    ){}
+            ){}
   
   ngOnInit(){
-
     this.formulario();
     this.llenarSelect();
-
   }
 
+  // Funcion para asignar valores al formulario y sus validaciones
   formulario(){
   
     this.formUsuario = this.fb.group({
       clave: ['', [Validators.required, Validators.minLength(4)]],
       contrasena: ['', [Validators.required, Validators.minLength(6)]],
-      contrasena2: ['', [Validators.required]],
+      contrasena2: ['', [Validators.required, Validators.minLength(6)]],
       empleado:['', {
         validators:[Validators.required, Validators.minLength(6)],
-        // asyncValidators: [
-        //   this.empleadoCheck(this.gestionUsuarioService)
-        // ],
-        // updateOn: 'blur'
+        asyncValidators: [
+          this.empleadoCheck(this.gestionUsuarioService)
+        ],
+        updateOn: 'blur'
       }],
       perfil: [null, [Validators.required]]
     },{
@@ -63,6 +62,7 @@ export class GestionUsuariosComponent {
     });
   }
 
+  // Se llena el Select de las opciones de perfil
   llenarSelect(){
     this.gestionUsuarioService.getLlenarSelect()
     .subscribe(data => {
@@ -73,6 +73,7 @@ export class GestionUsuariosComponent {
     }, error => console.log(error));
   }
 
+  // Funciones para mostrarla contraseña
   cambiarContrasena() {
     this.mostrarContrasena = !this.mostrarContrasena;
   }
@@ -85,6 +86,7 @@ export class GestionUsuariosComponent {
     console.log(this.formUsuario.value.perfil.idPerfil);
   }
 
+  // Funcion para validar si el empleado(id_empleado) existe el la DB
   empleadoCheck(api:any):AsyncValidatorFn{
     console.log(api);
     
@@ -102,33 +104,9 @@ export class GestionUsuariosComponent {
 
   }
 
-  // get f(){
-  //   return this.formUsuario.controls
-  // }
-
   campoNoValido( campo: string ) {
     return this.formUsuario.get(campo)?.invalid
             && this.formUsuario.get(campo)?.touched;
   }
-
-
-  // validarPassword(controlName:string, matchingControlName:string){
-  //   return (formGroup:FormGroup)=>{
-  //     const control = formGroup.controls[controlName];
-  //     const matchingControl = formGroup.controls[matchingControlName];
-
-  //     if(matchingControl.errors && !matchingControl.errors['validarPassword']){
-  //       return;
-  //     }
-
-  //     if(control.value !== matchingControl.value){
-  //       matchingControl.setErrors({validarPassword:true});
-  //     }else{
-  //       matchingControl.setErrors(null);
-  //     }
-  //   }
-  // }
-
-  
 
 }
