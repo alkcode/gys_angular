@@ -1,0 +1,38 @@
+<!-- <p>usuarios works!</p> -->
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-lg-10 col-md-10 container-fluid mt-5">
+            <h1 class="text-center">Usuarios</h1>
+
+            <div class="tabla-usuarios mt-5">
+                <table class="table">
+                    <thead>
+                      <th>id usuario</th>
+                      <th>Clave</th>
+                      <th>Password</th>
+                      <!-- <th>id Empleado</th> -->
+                      <th>Modificar</th>
+                      <!-- <th>Eliminar</th> -->
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let usuario of usuarios" class="table-active">
+                        <td>{{usuario.idUsuario}}</td>
+                        <td>{{usuario.clave}}</td>
+                        <td>{{usuario.password}}</td>
+                        <!-- <td><a (click)="editUsuario(usuario.idUsuario)"></a></td> -->
+                        <td><a [routerLink]="['/modificar-usuario',usuario.idUsuario]">Editar</a></td>
+                        <!-- <td><a (click)="deleteUsuario(usuario.idUsuario)">Eliminar</a></td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+            </div>
+        </div>
+    </div>
+</div>
+

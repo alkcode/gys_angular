@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Empleado } from '../interfaces/empleado';
+import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +18,11 @@ export class GestionUsuariosService {
       return this.http.get(this.baseUrl+'perfiles',{headers});
      
     // return this.http.get(this.baseUrl+'perfiles');
+  }
+
+
+  getValidarEmpleado(id_empleado:string):Observable<Empleado> {
+    // return this.http.get<Empleado>(`${this.baseUrl}empleados/${id_empleado}`);
+    return this.http.get<Empleado>(this.baseUrl+'empleados/'+id_empleado);
   }
 }

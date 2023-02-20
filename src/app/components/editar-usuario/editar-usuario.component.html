@@ -1,0 +1,28 @@
+<!-- <p>editar-usuario works!</p> -->
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-lg-10 col-md-10 container-fluid mt-5">
+            <h1 class="text-center">Editar usuario</h1>
+
+            <div class="mt-5">
+                <form [formGroup]="formularioUsuario">
+                    <div class="col-lg-9 col-md-12 mb-3">
+                        <input class="form-control" type="text" id="clave" name="clave" formControlName="clave" placeholder="Clave">
+                    </div>
+                    <div class="col-lg-9 col-md-12 mb-3">
+                        <input class="form-control" type="text" id="password" name="password" formControlName="password" placeholder="Password">
+                    </div>
+                    <div class="col-lg-9 col-md-12 mb-3">
+                        <input class="form-control" type="idEmpleado" id="idEmpleado" name="idEmpleado" formControlName="idEmpleado" placeholder="Id de empleado">
+                    </div>
+                    <input type="submit" [disabled]="formularioUsuario.invalid" class="btn btn-success btn-block" vale="Guardar">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

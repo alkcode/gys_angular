@@ -20,6 +20,8 @@ import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-
 import { GestionGuardiasComponent } from './components/gestion-guardias/gestion-guardias.component';
 import { ObjToArrayPipe } from './pipe/obj-to-array.pipe';
 import { CommonModule } from '@angular/common';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { CommonModule } from '@angular/common';
     RegistroGuardiasComponent,
     GestionUsuariosComponent,
     GestionGuardiasComponent,
-    ObjToArrayPipe
+    ObjToArrayPipe,
+    UsuariosComponent,
+    EditarUsuarioComponent
   ],
   imports: [
     BrowserModule,

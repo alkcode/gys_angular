@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Perfil, PerfilClass, Usuario } from '../../interfaces/perfiles';
+import { Perfil, PerfilClass } from '../../interfaces/perfiles';
 import { GestionGuardiasService } from 'src/app/services/gestion-guardias.service';
-import { Observable, of } from 'rxjs';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 // import { CommonModule } from '@angular/common';
 
 @Component({
@@ -23,16 +22,25 @@ export class GestionGuardiasComponent{
   actCreacion: boolean = false;
   actEliminacion: boolean = false;
 
-  valorLectura:number=0;
-  valorActualizacion:number=0;
-  valorCreacion:number=0;
-  valorEliminacion:number=0;
+  valorLectura:number=-1;
+  valorActualizacion:number=-2;
+  valorCreacion:number=-4;
+  valorEliminacion:number=8;
+
+  permisosData = [
+    { val: 1, name: 'Lectura' },
+    { id: 2, name: 'Actualización' },
+    { id: 4, name: 'Creación' },
+    { id: 8, name: 'Eliminacion' }
+  ];
 
   // Inicializar formGroup para el formulario
   formPerfil: FormGroup = new FormGroup({});
 
 
-  constructor(private gestionGuardiaService:GestionGuardiasService) {
+  constructor(private gestionGuardiaService:GestionGuardiasService, 
+    private fb: FormBuilder) {
+    this.formularioPerfil();
    }
 
   ngOnInit(){
@@ -40,27 +48,22 @@ export class GestionGuardiasComponent{
     console.log(this.usuario);
     
     this.mostrarPerfiles(this.usuario.idPerfil);
-    this.formularioPerfil();
+    // this.formularioPerfil();
   
   }
 
   mostrarPerfiles(opcion:any){
     this.gestionGuardiaService.mostrarPerfiles$(opcion)
         .subscribe(data=>{
-          // console.log(data);
-          // this.perfiles = data;
           this.perfil = data;
           console.log(this.perfil);
           console.log(this.perfil.opciones);
           console.log(this.perfil.descripcion);
-          
-
 
         },error=>{
           console.log(error);
         });
     console.log('Hola');
-    // this.listaPerfiles$ = this.gestionGuardiaService.mostrarPerfiles$(opcion);
 
   }
 // Formaulario
@@ -71,33 +74,35 @@ export class GestionGuardiasComponent{
       creacion: new FormControl(false),
       eliminacion: new FormControl(false)
     });
+
+
   }
+
 // Checkbox para asignarle permisos por opcion
   permisoLectura(){
     this.actLectura = !this.actLectura;
-    if(this.actLectura==true){
-      this.valorLectura=1*(-1);
-    }
+    this.valorLectura=this.valorLectura * (-1);
+
   }
 
   permisoActualizacion(){
     this.actActualizacion = !this.actActualizacion;
     if(this.actActualizacion==true){
-      this.valorActualizacion=2*(-1);
+      this.valorActualizacion=this.valorActualizacion * (-1);
     }
   }
 
   permisoCreacion(){
     this.actCreacion = !this.actCreacion;
     if(this.actCreacion==true){
-      this.valorCreacion=4*(-1);
+      this.valorCreacion=this.valorCreacion * (-1);
     }
   }
 
   permisoEliminacion(){
     this.actEliminacion = !this.actEliminacion;
     if(this.actEliminacion==true){
-      this.valorCreacion=8*(-1);
+      this.valorEliminacion= this.valorEliminacion * (-1);
     }
   }
 }

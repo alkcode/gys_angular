@@ -1,8 +1,10 @@
 import { HttpClient} from '@angular/common/http';
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { map, tap } from 'rxjs';
 import { GestionUsuariosService } from 'src/app/services/gestion-usuarios.service';
-import { validarPassword } from 'src/app/validators/confirmarPassword';
+import { ValidatorService } from 'src/app/validators/validator.service';
+
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -12,10 +14,10 @@ import { validarPassword } from 'src/app/validators/confirmarPassword';
 export class GestionUsuariosComponent {
 
   formUsuario: FormGroup = new FormGroup({});
-  clave='';
-  contasena='';
-  contasena2='';
-  nombre='';
+  // clave='';
+  // contasena='';
+  // contasena2='';
+  // nombre='';
   
   mostrarContrasena: boolean = false;
   mostrarContrasena2: boolean = false;
@@ -30,30 +32,35 @@ export class GestionUsuariosComponent {
   ];
 
 
-  constructor(private gestionUsuarioService:GestionUsuariosService){}
+  constructor(private fb:FormBuilder,
+              private gestionUsuarioService:GestionUsuariosService,
+              private validators: ValidatorService
+    ){}
   
   ngOnInit(){
-    // this.formUsuario = new FormGroup({
-    //   clave: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    //   contrasena: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    //   contrasena2: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    //   empleado: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    //   // perfil: new FormControl(this.perfiles[0])
-    //   perfil: new FormControl(null, [Validators.required])
-    // });
+
     this.formulario();
     this.llenarSelect();
 
   }
 
   formulario(){
-    this.formUsuario = new FormGroup({
-      clave: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      contrasena: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      contrasena2: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      empleado: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      perfil: new FormControl(null, [Validators.required])
-    },[validarPassword('contrasena', 'contrasena2')]);
+  
+    this.formUsuario = this.fb.group({
+      clave: ['', [Validators.required, Validators.minLength(4)]],
+      contrasena: ['', [Validators.required, Validators.minLength(6)]],
+      contrasena2: ['', [Validators.required]],
+      empleado:['', {
+        validators:[Validators.required, Validators.minLength(6)],
+        // asyncValidators: [
+        //   this.empleadoCheck(this.gestionUsuarioService)
+        // ],
+        // updateOn: 'blur'
+      }],
+      perfil: [null, [Validators.required]]
+    },{
+      validators: this.validators.validarPassword('contrasena', 'contrasena2')
+    });
   }
 
   llenarSelect(){
@@ -74,18 +81,54 @@ export class GestionUsuariosComponent {
     this.mostrarContrasena2 = !this.mostrarContrasena2;
   }
   
-
-  // validarDatos(){
-  //   const body = this.formUsuario.value;
-  //   console.log(body);
-  // }
-
-  getControl(name:any): AbstractControl | null {
-    return this.formUsuario.get(name);
-  }
-
   test(){
     console.log(this.formUsuario.value.perfil.idPerfil);
   }
+
+  empleadoCheck(api:any):AsyncValidatorFn{
+    console.log(api);
+    
+    return (control:AbstractControl)=>{
+    
+      return api.getValidarEmpleado(control.value)
+      
+      .pipe(
+        tap({
+          next:x => console.log(x),
+        }),
+        map(({result})=>(result) ? {empleadoCheck:true} : null)
+      )
+    }
+
+  }
+
+  // get f(){
+  //   return this.formUsuario.controls
+  // }
+
+  campoNoValido( campo: string ) {
+    return this.formUsuario.get(campo)?.invalid
+            && this.formUsuario.get(campo)?.touched;
+  }
+
+
+  // validarPassword(controlName:string, matchingControlName:string){
+  //   return (formGroup:FormGroup)=>{
+  //     const control = formGroup.controls[controlName];
+  //     const matchingControl = formGroup.controls[matchingControlName];
+
+  //     if(matchingControl.errors && !matchingControl.errors['validarPassword']){
+  //       return;
+  //     }
+
+  //     if(control.value !== matchingControl.value){
+  //       matchingControl.setErrors({validarPassword:true});
+  //     }else{
+  //       matchingControl.setErrors(null);
+  //     }
+  //   }
+  // }
+
+  
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,7 +19,7 @@ export class LoginComponent {
 
   // usuarioLogin= new Usuario("","");
 
-  constructor(private authService:AuthService, private router:Router) { }
+  constructor(private fb: FormBuilder,private authService:AuthService, private router:Router) { }
 
   ngOnInit(){
     // this.formularioLogin = new FormGroup({
@@ -31,14 +31,22 @@ export class LoginComponent {
   }
 
   formularioEnviado(){
-    const body = this.formularioLogin.value;
-    console.log(body);
+    // const body = this.formularioLogin.value;
+    // console.log(body);
+
+    console.log(this.formularioLogin.value);
+    
   }
 
   formLogin(){
-    this.formularioLogin = new FormGroup({
-      usuario: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    // this.formularioLogin = new FormGroup({
+    //   usuario: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    //   password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    // })
+
+    this.formularioLogin = this.fb.group({
+      usuario: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
 

@@ -1,18 +1,18 @@
 export interface Empleado{
-    idSociedad: String;
-    idEmpleado: String;
+    id_sociedad: String;
+    id_empleado: String;
     nombre: String;
-    apellidoPaterno: String;
-    apellidoMaterno: String;
-    idLegal: String;
+    apellido_1: String;
+    apellido_2: String;
+    id_legal: String;
 
 }
 
 export class EmpleadoClass implements Empleado{
-    idSociedad='';
-    idEmpleado='';
+    id_sociedad='';
+    id_empleado='';
     nombre='';
-    apellidoPaterno='';
-    apellidoMaterno='';
-    idLegal='';
+    apellido_1='';
+    apellido_2='';
+    id_legal='';
 } 

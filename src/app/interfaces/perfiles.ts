@@ -1,10 +1,11 @@
 import { Opcion } from "./opcion";
+import { Usuario } from "./usuario";
 
 export interface Perfil {
     descripcion: String;
     idPerfil: Number;
     opciones: Array<Opcion>;
-    usuarios?: String;
+    usuarios?: Array<Usuario>;
     
 }
 
@@ -12,7 +13,7 @@ export class PerfilClass implements Perfil{
     descripcion = '';
     idPerfil = 0;
     opciones = [];
-    usuarios? = '';
+    usuarios? = [];
 } 
 
 // export interface Opcion{

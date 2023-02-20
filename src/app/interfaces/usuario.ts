@@ -1,10 +1,13 @@
+import { Empleado, EmpleadoClass } from "./empleado";
 import { Perfil } from "./perfiles";
 
 export interface Usuario{
     idUsuario?: Number;
     clave: String;
     password: String;
-    perfiles: Array<Perfil>;
+    // idEmpleado: String;
+    empleado?: Empleado;
+    perfiles?: Array<Perfil>;
 }
 
 
@@ -12,7 +15,9 @@ export class UsuarioClass implements Usuario{
     idUsuario?= 0;
     clave='';
     password='';
-    perfiles= [];
+    // idEmpleado='';
+    empleado?: Empleado;
+    perfiles?= [];
 } 
 
 // export interface Usuario {
