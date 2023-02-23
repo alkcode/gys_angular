@@ -15,5 +15,7 @@ export class BolsaTrabajoService {
 
   getBolsaTrabajo(): Observable<BolsaTrabajo> {
     return this.http.get<BolsaTrabajo>(this.baseUrl+'rest_bolsaTrabajo/reg');
+    // const bolsaTrabajo$ = this.http.get<BolsaTrabajo>(`${this.baseUrl}rest_bolsaTrabajo/reg`)
+    // return BolsaTrabajo$
   }
 }

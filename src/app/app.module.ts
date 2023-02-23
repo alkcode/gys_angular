@@ -22,6 +22,7 @@ import { ObjToArrayPipe } from './pipe/obj-to-array.pipe';
 import { CommonModule } from '@angular/common';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
+// import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
     GestionGuardiasComponent,
     ObjToArrayPipe,
     UsuariosComponent,
-    EditarUsuarioComponent
+    EditarUsuarioComponent,
+    // CheckboxComponent
   ],
   imports: [
     BrowserModule,

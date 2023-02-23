@@ -15,16 +15,15 @@ export class UsuarioService {
   constructor(private http:HttpClient) { }
 
   getUsuarios$():Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(`${this.url}usuarios?conPerfiles=false`)
-            // .pipe(
-            //   map(({data}:any) => {
-            //     return data
-            //   })
-            // );
+    const usuarios$ = this.http.get<Usuario[]>(`${this.url}usuarios?conPerfiles=false`)
+    return usuarios$;
+    // return this.http.get<Usuario[]>(`${this.url}usuarios?conPerfiles=false`)
   }
 
   getUsuario(id:Number):Observable<Usuario>{
-    return this.http.get<Usuario>(`${this.url}usuarios/${id}`);
+    // return this.http.get<Usuario>(`${this.url}usuarios/${id}`);
+    const usuario$ = this.http.get<Usuario>(`${this.url}usuarios/${id}`);
+    return usuario$;
   }
 
   saveUsuario(usuario:Usuario):Observable<Usuario>{
@@ -40,3 +39,4 @@ export class UsuarioService {
   }
 
 }
+// git commit -m "prueba de forms y observables"
