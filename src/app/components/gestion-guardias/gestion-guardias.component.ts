@@ -28,7 +28,7 @@ export class GestionGuardiasComponent {
   valorLectura: number = -1;
   valorActualizacion: number = -2;
   valorCreacion: number = -4;
-  valorEliminacion: number = 8;
+  valorEliminacion: number = -8;
 
   permisosData = [
     { val: 1, name: 'Lectura' },

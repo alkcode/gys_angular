@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BolsaTrabajoComponent } from './components/bolsa-trabajo/bolsa-trabajo.component';
+import { CheckComponent } from './components/check/check.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'registro-guardia', component:RegistroGuardiasComponent},
   {path:'gestion-usuarios',component:GestionUsuariosComponent},
   {path:'usuarios', component:UsuariosComponent},
+  {path:'check', component:CheckComponent},
   {path:'modificar-usuario/:id', component:EditarUsuarioComponent},
   {path:'**', redirectTo:'home'}
 ];

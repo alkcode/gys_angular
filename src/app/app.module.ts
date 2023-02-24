@@ -22,7 +22,7 @@ import { ObjToArrayPipe } from './pipe/obj-to-array.pipe';
 import { CommonModule } from '@angular/common';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
-// import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { CheckComponent } from './components/check/check.component';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
     ObjToArrayPipe,
     UsuariosComponent,
     EditarUsuarioComponent,
-    // CheckboxComponent
+    CheckComponent
   ],
   imports: [
     BrowserModule,

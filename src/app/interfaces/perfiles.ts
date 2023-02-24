@@ -5,6 +5,7 @@ export interface Perfil {
     descripcion: String;
     idPerfil: Number;
     opciones: Array<Opcion>;
+    idNivelAcceso?:Number;
     usuarios?: Array<Usuario>;
     
 }
@@ -13,6 +14,7 @@ export class PerfilClass implements Perfil{
     descripcion = '';
     idPerfil = 0;
     opciones = [];
+    idNivelAcceso?= 0;
     usuarios? = [];
 } 
 
