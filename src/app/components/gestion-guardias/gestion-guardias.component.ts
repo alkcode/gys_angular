@@ -83,7 +83,7 @@ export class GestionGuardiasComponent {
 
         this.opciones.forEach((element, index) => {
 
-            const permiso = new FormGroup({
+            const permisos = new FormGroup({
               
               lectura: new FormControl(false),
               actualizacion: new FormControl(false),
@@ -93,12 +93,13 @@ export class GestionGuardiasComponent {
             
             //const f = this.form2.get('permisos') as FormArray;
             //f.push(permiso);
-            this.form1.insert(index, permiso);
-            console.log('hey listen: ', this.form1);
+            this.form1.insert(index, permisos);
+            console.log('hey listen: ', this.form1.value);
 
             
           
         });
+        console.log('El bueno: ', this.form1.value);
 
       }, error => {
         console.log(error);
@@ -124,6 +125,10 @@ export class GestionGuardiasComponent {
     return this.fb.group({
       // lectura: new 
     })
+  }
+
+  get permisos(): FormArray {
+    return this.form1.get('permisos') as FormArray;
   }
 
   // Checkbox para asignarle permisos por opcion

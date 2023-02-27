@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { data } from 'jquery';
 import { Perfil, PerfilClass } from 'src/app/interfaces/perfiles';
 import { GestionGuardiasService } from 'src/app/services/gestion-guardias.service';
 
@@ -13,12 +12,6 @@ export class CheckComponent {
   perfil: Perfil = new PerfilClass;
   opcionesForm: any[] = [];
 
-  permisosValue:Array<any> =[
-    {name:'lectura', value:1, status:null},
-    {name:'creacion', value:2, status:null},
-    {name:'actualizacion', value:4, status:null},
-    {name:'eliminacion', value:8, status:null}
-  ];
 // Inicializamos el formulario
   formOpciones: FormGroup = new FormGroup({});
 
@@ -31,6 +24,8 @@ export class CheckComponent {
   valorActualizacion: number = -2;
   valorCreacion: number = -4;
   valorEliminacion: number = -8;
+
+  totalIDNivelAcceso = 0;
   
   constructor(private fb:FormBuilder,
               private gestionGuardiasService:GestionGuardiasService
@@ -38,101 +33,65 @@ export class CheckComponent {
 
   ngOnInit(){
 
-    this.crearFormularioOpciones();
-
-    this.gestionGuardiasService.mostrarPerfiles(2)
+    this.gestionGuardiasService.mostrarPerfiles(1)
         .subscribe(data =>{
-          this.perfil = data;   //Todods los datos
+          this.perfil = data;   //Todos los datos
           this.opcionesForm = this.perfil.opciones; //Las opciones
           console.log(this.perfil);
-          // Opciones:Registro de guardias, Consulta de guardias(2)
-          // console.log(this.opcionesForm);
-          // let arrayOpc:any[]=[];
-          // let guardarOpc:any[]=[];
-
-          this.opcionesForm.forEach((element, index)=>{
-            // guardarOpc = element.descripcion;
-            // console.log('Este es el element:',element.descripcion);
-            // arrayOpc[index] = element.descripcion;
-            // console.log(typeof(arrayOpc[index]));
-            
-            
-            // const opcionesGyS = this.fb.group({
-            //   opciones: new FormControl(),
-            // });
+          console.log(this.opcionesForm[0].descripcion);
+          console.log(this.opcionesForm[1].descripcion);
           
-            // this.opcionesForm.push(new FormControl(''))
+          this.crearFormularioOpciones(this.perfil);
+          
+          this.opcionesForm.forEach((element, index)=>{
 
-            // this.addOpciones(element.descripcion);
-            // this.formOpciones = this.fb.group({
-            //   opciones: this.fb.array([])
-            // })
-
-            // this.crearOpcion((`"${element.descripcion}"`));
-            // console.log(this.crearOpcion);
-
-            // const permiso = new FormGroup({
-              
-            //   lectura: new FormControl(false),
-            //   actualizacion: new FormControl(false),
-            //   creacion: new FormControl(false),
-            //   eliminacion: new FormControl(false)
-            // });
-
-            const permisos = this.fb.group({
-              lectura:[false],
-              creacion:[false],
-              actualizacion:[false],
-              eliminacion:[false]
+            const opc= this.fb.group({
+              // opciones: new FormControl(this.opcionesForm[index].descripcion)
+              idOpcion:  this.fb.control(this.opcionesForm[index].idOpcion),
+              descripcion: this.fb.control(this.opcionesForm[index].descripcion),
+              componente: this.fb.control(this.opcionesForm[index].componente),
+              idNivelAcceso:  this.fb.control(this.totalIDNivelAcceso),
+              // idNivelAcceso:  this.fb.control(this.opcionesForm[index].idNivelAcceso),
+              lectura: this.fb.control(false),
+              creacion: this.fb.control(false),
+              actualizacion: this.fb.control(false),
+              eliminacion: this.fb.control(false),
+              // permisos: this.fb.array([
+              //   this.fb.group({
+              //     lectura:[false],
+              //     creacion:[false],
+              //     actualizacion:[false],
+              //     eliminacion:[false]
+              //   })
+              // ])
             });
-            this.permisos.push(permisos)
-            // this.formOpciones.insert(index, permiso);
-            console.log('hey listen: ', this.formOpciones);
-            
+
+            this.opcionesArray.push(opc);
 
           });
-          console.log('hey listen: ', this.permisos);
           
         })
 
   }
 
   // Creacion del formluario
-  crearFormularioOpciones(){
-    // this.formOpciones = this.fb.group({
-    //   opciones: this.fb.array([])
-    // })
-    // console.log('Este es el formulario: ',this.formOpciones);
-    // this.formOpciones = new FormGroup({
-    //   opciones:new FormArray([])
-    // })
-
+  crearFormularioOpciones(data:any){
+ 
     this.formOpciones = this.fb.group({
-      permisos: this.fb.array([])
+      descripcion:[data.descripcion, [Validators.required, Validators.minLength(4)]],
+      idPerfil:[data.idPerfil,[Validators.required]],
+      opciones: this.fb.array([])
     })
 
     
   }
 
-  get permisos(): FormArray {
-    return this.formOpciones.get('permisos') as FormArray;
+  get opcionesArray(): FormArray {
+    return this.formOpciones.get('opciones') as FormArray;
   }
 
-
-  addOpciones(descripcion:any){
-    // const opcionesGyS = this.fb.group({
-    //   opciones: new FormControl(descripcion, Validators.required),
-    // });
-  
-    // this.opcionesForm.push(this.fb.control('opciones'))
-
-    
-  }
-
-  // crearOpcion(des:any){
-  //   return this.fb.group({
-  //     descripcion:des
-  //   });
+  // get opcionesArray(): FormArray {
+  //   return <FormArray>this.formOpciones.get('opciones') as FormArray;
   // }
 
 
@@ -161,5 +120,10 @@ export class CheckComponent {
     if (this.actEliminacion == true) {
       this.valorEliminacion = this.valorEliminacion * (-1);
     }
+  }
+
+  enviarDatos(){
+    console.log('Formulario:',this.formOpciones.value);
+    
   }
 }

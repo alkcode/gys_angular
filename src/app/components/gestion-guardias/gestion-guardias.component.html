@@ -17,12 +17,16 @@
                     <input type="hidden" formControlName="perfil"> -->
 
                     <div *ngFor="let opcion of opciones">
-        
+                        
+                    <form [formGroup]="form1">
+                    <div>
                     <div>
                         <div class="col-lg-4">
                             <label>{{opcion.idOpcion}} .- {{opcion.descripcion}}</label>
                         </div>
-                        <!-- <div class="col-lg-2 col-md-3" *ngFor="let permiso of form1.value; let i = index">
+                        <div formGroupName="permisos">
+                        <div *ngFor="let per of permisos.controls; index as i">
+                         <!-- <div class="col-lg-2 col-md-3" *ngFor="let permiso of form1.value; let i = index">
                             <div class="form-check">
                                 <input (click)="permisoLectura()" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault-1" formControlName="lectura">
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -54,7 +58,14 @@
                                 </label>
                             </div>
                         </div> -->
+                        <input [formControlName]="i" type="checkbox">
+
                     </div>
+                    </div>
+                    </div>
+
+                    </div>
+                    </form>
                     </div>
 
                     <!-- Boton de guardar -->

@@ -7,134 +7,20 @@
             <app-menu></app-menu>
         </div>
         <div class="col-lg-10 col-md-10 container-fluid mt-5">
-            <!-- <form [formGroup]="formOpciones">
-                <div formArrayName="opciones">
-                    <div *ngFor="let opc of opcionesForm">
-                        <input>
-                    </div>
 
-                </div>
-            </form> -->
             <div>
                 <p>Descripcion: {{perfil.descripcion}} </p>
                 <p>id Perfil: {{perfil.idPerfil}}</p>
                 <hr>
-                
-                <!-- Ciclo For -->
-                <!-- <div *ngFor="let opcion of perfil.opciones; let i=index;">
-                    <p>Opcion {{i+1}}: {{opcion.descripcion}}</p>
-                    <p>Componente: {{opcion.componente}}</p>
-                    {{opcion.componente}}
-                    <form [formGroup]="formOpciones"> 
-                        <div formArrayName="permisos">
-                            <div *ngFor="let formOpciones of permisos.controls; let i=index;">
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="form-check">
-                                        <input (click)="permisoLectura()" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault-1" formControlName="lectura">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Lectura
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="form-check">
-                                        <input (click)="permisoActualizacion()" class="form-check-input" type="checkbox" value="2" id="flexCheckDefault-2" formControlName="creacion">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Actualización
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="form-check">
-                                        <input (click)="permisoCreacion()" class="form-check-input" type="checkbox" value="4" id="flexCheckDefault-3" formControlName="actualizacion">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Creación
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="form-check">
-                                        <input (click)="permisoEliminacion()" class="form-check-input" type="checkbox" value="8" id="flexCheckDefault-4" formControlName="eliminacion">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Eliminación
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <hr>
-                </div> -->
-                <!-- Ciclo For -->
 
-                <!-- Prueba 2 -->
-                <!-- <form [formGroup]="formOpciones"> 
-                    <div *ngFor="let formOpciones of permisos.controls; let i=index;">
-                        <div formArrayName="permisos">
-                        <div *ngFor="let opcion of perfil.opciones; let j=index;">
-                            <p>Opcion {{i+1}}: {{opcion.descripcion}}</p>
-                            <p>Componente: {{opcion.componente}}</p>
-                            {{opcion.componente}}
-                            
-                                <div formGroupName="{{j}}">
-                                    {{j}}
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="form-check">
-                                        <input (click)="permisoLectura()" class="form-check-input" type="checkbox" desabled value="1" id="flexCheckDefault-1" formControlName="lectura">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Lectura
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="form-check">
-                                        <input (click)="permisoCreacion()" class="form-check-input" type="checkbox" value="4" id="flexCheckDefault-3" formControlName="creacion">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Creación
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="form-check">
-                                        <input (click)="permisoActualizacion()" class="form-check-input" type="checkbox" value="2" id="flexCheckDefault-2" formControlName="actualizacion">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Actualización
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="form-check">
-                                        <input (click)="permisoEliminacion()" class="form-check-input" type="checkbox" value="8" id="flexCheckDefault-4" formControlName="eliminacion">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Eliminación
-                                        </label>
-                                    </div>
-                                </div>
-                                </div>
-                                <hr>
-
-                            </div>
-                        </div>
-                    </div>
-                </form> -->
-                <!-- Prueba 2 -->
-
-                <!-- prueba 3 -->
                 <form [formGroup]="formOpciones"> 
-                    <div *ngFor="let opcion of perfil.opciones; let j=index;">
-                        <p>Opcion {{j+1}}: {{opcion.descripcion}}</p>
-                        <p>Componente: {{opcion.componente}}</p>
-                        {{opcion.componente}}
-                        <div >
-                        
-                        <div *ngFor="let permiso of permisos.controls; let i=index;">
-                            <div *ngIf="i==j">
-                                {{i}}
-                            <div formArrayName="permisos">
-                                <div formGroupName="{{i}}">
+                    <div *ngFor="let opcion of opcionesArray.controls; let i=index;">
+                        {{perfil.opciones[i].descripcion}}
+                        <div formArrayName="opciones">
+                            <div formGroupName="{{i}}">
                                 <div class="col-lg-2 col-md-3">
                                     <div class="form-check">
-                                        <input (click)="permisoLectura()" class="form-check-input" type="checkbox" value="1" id="check{{i}}{{j}}" formControlName="lectura">
+                                        <input (click)="permisoLectura()" class="form-check-input" type="checkbox" value="1" id="check{{i}}" formControlName="lectura">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Lectura
                                         </label>
@@ -142,7 +28,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-3">
                                     <div class="form-check">
-                                        <input (click)="permisoActualizacion()" class="form-check-input" type="checkbox" value="2" id="check{{i}}{{j}}" formControlName="creacion">
+                                        <input (click)="permisoActualizacion()" class="form-check-input" type="checkbox" value="2" id="check{{i}}" formControlName="actualizacion">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Actualización
                                         </label>
@@ -150,7 +36,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-3">
                                     <div class="form-check">
-                                        <input (click)="permisoCreacion()" class="form-check-input" type="checkbox" value="4" id="check{{i}}{{j}}" formControlName="actualizacion">
+                                        <input (click)="permisoCreacion()" class="form-check-input" type="checkbox" value="4" id="check{{i}}" formControlName="creacion">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Creación
                                         </label>
@@ -158,26 +44,27 @@
                                 </div>
                                 <div class="col-lg-2 col-md-3">
                                     <div class="form-check">
-                                        <input (click)="permisoEliminacion()" class="form-check-input" type="checkbox" value="8" id="check{{i}}{{j}}" formControlName="eliminacion">
+                                        <input (click)="permisoEliminacion()" class="form-check-input" type="checkbox" value="8" id="check{{i}}" formControlName="eliminacion">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Eliminación
                                         </label>
                                     </div>
                                 </div>
-                                </div>
-                                <hr>
 
                             </div>
                         </div>
-                        </div>
+                        <hr>
                     </div>
-                    </div>
+
+                    <input class="btn btn-success" type="submit" value="Enviar" (click)="enviarDatos()">
                 </form>
                 <!-- prueba 3 -->
         </div>
     </div>
 
-    {{formOpciones.value | json}}
+    <pre>
+        {{formOpciones.value | json}}
+    </pre>
 
     <br>
     {{valorActualizacion+valorCreacion+valorEliminacion+valorLectura}}
