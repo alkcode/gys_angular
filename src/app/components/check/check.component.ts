@@ -20,12 +20,12 @@ export class CheckComponent {
   actCreacion: boolean = false;
   actEliminacion: boolean = false;
 
-  valorLectura: number = -1;
-  valorActualizacion: number = -2;
-  valorCreacion: number = -4;
-  valorEliminacion: number = -8;
+  valorLectura: number = 1;
+  valorActualizacion: number = 2;
+  valorCreacion: number = 4;
+  valorEliminacion: number = 8;
 
-  totalIDNivelAcceso = 0;
+  totalIDNivelAcceso:number = 0;
   
   constructor(private fb:FormBuilder,
               private gestionGuardiasService:GestionGuardiasService
@@ -95,30 +95,92 @@ export class CheckComponent {
   // }
 
 
-  permisoLectura() {
-    this.actLectura = !this.actLectura;
-    this.valorLectura = this.valorLectura * (-1);
-
-  }
-
-  permisoActualizacion() {
-    this.actActualizacion = !this.actActualizacion;
-    if (this.actActualizacion == true) {
-      this.valorActualizacion = this.valorActualizacion * (-1);
+  permisoLectura(i:number) {
+    console.log(i);
+    let permisoLectura = this.formOpciones.get('opciones')?.value[i].lectura;
+    console.log('Su permiso esta:',permisoLectura);
+    permisoLectura = !permisoLectura;
+  
+    if(permisoLectura){
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
+      console.log(b+' '+desc);
+      b = b + this.valorLectura;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    } else {
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      b = b - this.valorLectura;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     }
   }
 
-  permisoCreacion() {
-    this.actCreacion = !this.actCreacion;
-    if (this.actCreacion == true) {
-      this.valorCreacion = this.valorCreacion * (-1);
+  permisoActualizacion(i:number) {
+    // this.actActualizacion = !this.actActualizacion;
+    // if (this.actActualizacion == true) {
+    //   this.valorActualizacion = this.valorActualizacion * (-1);
+    console.log(i);
+    let permisoActualizacion = this.formOpciones.get('opciones')?.value[i].actualizacion;
+    console.log('Su permiso esta:',permisoActualizacion);
+    permisoActualizacion = !permisoActualizacion;
+  
+    if(permisoActualizacion){
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
+      console.log(b+' '+desc);
+      b = b + this.valorActualizacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    } else {
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      b = b - this.valorActualizacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    }
+    // }
+  }
+
+  permisoCreacion(i:number) {
+    // this.actCreacion = !this.actCreacion;
+    // if (this.actCreacion == true) {
+    //   this.valorCreacion = this.valorCreacion * (-1);
+    // }
+    console.log(i);
+    let permisoCreacion = this.formOpciones.get('opciones')?.value[i].creacion;
+    console.log('Su permiso esta:',permisoCreacion);
+    permisoCreacion = !permisoCreacion;
+  
+    if(permisoCreacion){
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
+      console.log(b+' '+desc);
+      b = b + this.valorCreacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    } else {
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      b = b - this.valorCreacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     }
   }
 
-  permisoEliminacion() {
-    this.actEliminacion = !this.actEliminacion;
-    if (this.actEliminacion == true) {
-      this.valorEliminacion = this.valorEliminacion * (-1);
+  permisoEliminacion(i:number) {
+    // this.actEliminacion = !this.actEliminacion;
+    // if (this.actEliminacion == true) {
+    //   this.valorEliminacion = this.valorEliminacion * (-1);
+    // }
+
+    console.log(i);
+    let permisoEliminacion = this.formOpciones.get('opciones')?.value[i].eliminacion;
+    console.log('Su permiso esta:',permisoEliminacion);
+    permisoEliminacion = !permisoEliminacion;
+  
+    if(permisoEliminacion){
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
+      console.log(b+' '+desc);
+      b = b + this.valorEliminacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    } else {
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      b = b - this.valorEliminacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     }
   }
 
