@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, tap } from 'rxjs';
 import { GestionUsuariosService } from 'src/app/services/gestion-usuarios.service';
 import { ValidatorService } from 'src/app/validators/validator.service';
@@ -23,13 +23,6 @@ export class GestionUsuariosComponent {
 
   listaPerfiles: any[] = [];
 
-  perfiles = [
-
-    {nombre: 'Guardias', valor: '1'},
-    {nombre: 'Suplencias', valor: '2'},
-    {nombre: 'Presupuesto', valor: '3'},
-  ];
-
 
   constructor(private fb:FormBuilder,
               private gestionUsuarioService:GestionUsuariosService,
@@ -45,9 +38,9 @@ export class GestionUsuariosComponent {
   formulario(){
   
     this.formUsuario = this.fb.group({
-      clave: ['', [Validators.required, Validators.minLength(4)]],
-      contrasena: ['', [Validators.required, Validators.minLength(6)]],
-      contrasena2: ['', [Validators.required, Validators.minLength(6)]],
+      clave: ['jamh', [Validators.required, Validators.minLength(4)]],
+      contrasena: ['1111111', [Validators.required, Validators.minLength(6)]],
+      contrasena2: ['1111111', [Validators.required, Validators.minLength(6)]],
       empleado:['', {
         validators:[Validators.required, Validators.minLength(6)],
         asyncValidators: [
@@ -60,6 +53,11 @@ export class GestionUsuariosComponent {
       validators: this.validators.validarPassword('contrasena', 'contrasena2')
     });
   }
+
+  // get empleado(): FormControl {
+  //   return this.formUsuario.get('empleado') as FormControl;
+  // }
+
 
   // Se llena el Select de las opciones de perfil
   llenarSelect(){

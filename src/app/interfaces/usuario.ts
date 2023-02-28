@@ -20,7 +20,3 @@ export class UsuarioClass implements Usuario{
     perfiles?= [];
 } 
 
-// export interface Usuario {
-//     usuario: String;
-//     contrasena: String;
-// }

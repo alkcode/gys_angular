@@ -15,8 +15,8 @@
 
                 <form [formGroup]="formOpciones"> 
                     <div *ngFor="let opcion of opcionesArray.controls; let i=index;">
-                        {{perfil.opciones[i].descripcion}}
                         <div formArrayName="opciones">
+                        {{perfil.opciones[i].descripcion}}
                             <div formGroupName="{{i}}">
                                 <div class="col-lg-2 col-md-3">
                                     <div class="form-check">
@@ -67,6 +67,3 @@
     </pre>
 
     <br>
-    {{valorActualizacion+valorCreacion+valorEliminacion+valorLectura}}
-
-    <br><br><br><br>  

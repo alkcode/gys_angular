@@ -1,95 +1,54 @@
-<!-- <p>gestion-guardias works!</p> -->
-<h1 class="text-center">{{perfil.descripcion}}</h1>
-<form [formGroup]="formPerfil">
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <div class="col-lg-12 col-md-10 col-sm-12 mt-3 mb-3">
-                <div class="row">
-                    <!-- <div formArrayName="opciones">
-                        <div *ngFor="let opcion of formPerfil.controls.opciones; let i=index;">
-
-                        </div>
-                    </div> -->
-                    <!-- <input type="hidden" formControlName="clave">
-                    <input type="hidden" formControlName="contrasena">
-                    <input type="hidden" formControlName="empleado">
-                    <input type="hidden" formControlName="idPerfil">
-                    <input type="hidden" formControlName="perfil"> -->
-
-                    <div *ngFor="let opcion of opciones">
-                        
-                    <form [formGroup]="form1">
-                    <div>
-                    <div>
-                        <div class="col-lg-4">
-                            <label>{{opcion.idOpcion}} .- {{opcion.descripcion}}</label>
-                        </div>
-                        <div formGroupName="permisos">
-                        <div *ngFor="let per of permisos.controls; index as i">
-                         <!-- <div class="col-lg-2 col-md-3" *ngFor="let permiso of form1.value; let i = index">
-                            <div class="form-check">
-                                <input (click)="permisoLectura()" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault-1" formControlName="lectura">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Lectura
-                                </label>
+<div class="row mt-5 mb-5">
+    <div class="col-md-12">
+        <div class="col-lg-12 col-md-10 col-sm-12 mt-3 mb-3">
+            <h3 class="text-center mb-5">{{perfil.descripcion}}</h3>
+            <form [formGroup]="formOpciones"> 
+                <div *ngFor="let opcion of opcionesArray.controls; let i=index;">
+                    <strong><p>{{perfil.opciones[i].descripcion}}<p></strong>
+                    <div formArrayName="opciones">
+                        <div formGroupName="{{i}}">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-check">
+                                    <input (click)="permisoLectura(i)" class="form-check-input" type="checkbox" value="1" id="check{{i}}" formControlName="lectura">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Lectura
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-check">
+                                    <input (click)="permisoActualizacion(i)" class="form-check-input" type="checkbox" value="2" id="check{{i}}" formControlName="actualizacion">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Actualización
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-check">
+                                    <input (click)="permisoCreacion(i)" class="form-check-input" type="checkbox" value="4" id="check{{i}}" formControlName="creacion">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Creación
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-check">
+                                    <input (click)="permisoEliminacion(i)" class="form-check-input" type="checkbox" value="8" id="check{{i}}" formControlName="eliminacion">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Eliminación
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-3">
-                            <div class="form-check">
-                                <input (click)="permisoActualizacion()" class="form-check-input" type="checkbox" value="2" id="flexCheckDefault-2" formControlName="actualizacion">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Actualización
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-3">
-                            <div class="form-check">
-                                <input (click)="permisoCreacion()" class="form-check-input" type="checkbox" value="4" id="flexCheckDefault-3" formControlName="creacion">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Creación
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-3">
-                            <div class="form-check">
-                                <input (click)="permisoEliminacion()" class="form-check-input" type="checkbox" value="8" id="flexCheckDefault-4" formControlName="eliminacion">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Eliminación
-                                </label>
-                            </div>
-                        </div> -->
-                        <input [formControlName]="i" type="checkbox">
-
-                    </div>
-                    </div>
-                    </div>
-
-                    </div>
-                    </form>
-                    </div>
-
-                    <!-- Boton de guardar -->
-                    <div class="row mt-5">
-                        <div class="col-lg-12 text-center ">
-                            <button type="button" class="btn btn-success rounded-pill mx-3">Guardar</button>
-                            <button type="button" class="btn btn-danger rounded-pill mx-3">Cancelar</button>
                         </div>
                     </div>
+                    <hr>
                 </div>
-            </div>
+
+                <input class="btn btn-success" type="submit" value="Enviar" (click)="enviarDatos()">
+            </form>
         </div>
     </div>
-</form>
+</div>
 
-<!-- {{clave}}
-{{contrasena}}
-{{contrasena2}}
-{{nombre}}
-{{perfil}}
-
-<pre>
-    {{perfiles | json}}
-</pre> -->
-
-
-{{valorActualizacion+valorCreacion+valorEliminacion+valorLectura}}

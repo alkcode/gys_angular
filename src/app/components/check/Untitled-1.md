@@ -16,3 +16,6 @@ https://stackoverflow.com/questions/53575046/patchvalue-or-setvalue-with-formgro
 
 https://es.stackoverflow.com/questions/347769/como-acceder-al-valor-de-un-item-en-un-form-array-en-angular-8
 https://juliescript.dev/formularios-dinamicos-angular/
+
+
+https://www.delftstack.com/es/howto/javascript/javascript-remove-object-from-array/ -->crear un array nuevo

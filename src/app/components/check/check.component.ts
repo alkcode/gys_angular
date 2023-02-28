@@ -15,11 +15,6 @@ export class CheckComponent {
 // Inicializamos el formulario
   formOpciones: FormGroup = new FormGroup({});
 
-  actLectura: boolean = false;
-  actActualizacion: boolean = false;
-  actCreacion: boolean = false;
-  actEliminacion: boolean = false;
-
   valorLectura: number = 1;
   valorActualizacion: number = 2;
   valorCreacion: number = 4;
@@ -33,7 +28,7 @@ export class CheckComponent {
 
   ngOnInit(){
 
-    this.gestionGuardiasService.mostrarPerfiles(1)
+    this.gestionGuardiasService.mostrarPerfiles(2)
         .subscribe(data =>{
           this.perfil = data;   //Todos los datos
           this.opcionesForm = this.perfil.opciones; //Las opciones
@@ -90,8 +85,8 @@ export class CheckComponent {
     return this.formOpciones.get('opciones') as FormArray;
   }
 
-  // get opcionesArray(): FormArray {
-  //   return <FormArray>this.formOpciones.get('opciones') as FormArray;
+  // get opcionesArray(index:number):FormArray {
+  //   return <FormArray>this.formOpciones.get('opciones');
   // }
 
 
@@ -185,7 +180,7 @@ export class CheckComponent {
   }
 
   enviarDatos(){
-    console.log('Formulario:',this.formOpciones.value);
+    console.log('Formulario:',this.formOpciones.value.opciones);
     
   }
 }

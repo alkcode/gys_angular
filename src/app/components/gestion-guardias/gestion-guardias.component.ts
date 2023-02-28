@@ -2,6 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Perfil, PerfilClass } from '../../interfaces/perfiles';
 import { GestionGuardiasService } from 'src/app/services/gestion-guardias.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { GestionUsuariosService } from 'src/app/services/gestion-usuarios.service';
+import { Empleado, EmpleadoClass } from 'src/app/interfaces/empleado';
+import { Usuario, UsuarioClass } from 'src/app/interfaces/usuario';
+import { Opcion } from 'src/app/interfaces/opcion';
 // import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,150 +16,208 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 export class GestionGuardiasComponent {
 
   @Input() usuario: any | undefined;
-
-  // perfil: Perfil = []; 
+ 
   perfil: Perfil = new PerfilClass;
+  empleado: Empleado =  new EmpleadoClass;
+  usuarioData: Usuario = new UsuarioClass;
 
-  opciones: any[] = [];
+  opcionesAux:any[]=[];
 
+  opcionesForm: any[] = [];
 
-  // Activador de los permisos
-  actLectura: boolean = false;
-  actActualizacion: boolean = false;
-  actCreacion: boolean = false;
-  actEliminacion: boolean = false;
+  private valorLectura: number = 1;
+  private valorActualizacion: number = 2;
+  private valorCreacion: number = 4;
+  private valorEliminacion: number = 8;
 
-  valorLectura: number = -1;
-  valorActualizacion: number = -2;
-  valorCreacion: number = -4;
-  valorEliminacion: number = -8;
+  totalIDNivelAcceso:number = 0;
 
-  permisosData = [
-    { val: 1, name: 'Lectura' },
-    { id: 2, name: 'Actualización' },
-    { id: 4, name: 'Creación' },
-    { id: 8, name: 'Eliminacion' }
-  ];
 
   // Inicializar formGroup para el formulario
-  formPerfil: FormGroup = new FormGroup({});
-
-  form1: any = new FormArray([]);
-
- 
-
-  form2 = this.fb.group({
-    permisos: this.fb.array([])
-  });
-
-   skills = new FormArray([]);
-
+  formOpciones: FormGroup = new FormGroup({});
 
   constructor(private gestionGuardiaService: GestionGuardiasService,
-    private fb: FormBuilder) {
-    this.formPerfil = this.fb.group({
-      permisos: this.fb.array([])
-    })
-
- 
+              private gestionUsuarioService: GestionUsuariosService,
+              private fb: FormBuilder) {
     // this.formularioPerfil();
   }
 
   ngOnInit() {
-    // console.log(this.usuario);
-
-    // console.log('Objeto Usuario:',this.usuario.perfil.idPerfil);
-
+    // console.log('Hola',typeof(this.usuario.empleado));
+    console.log('Hola:',this.usuario);
+    this.getEmpleadoData(this.usuario.empleado);
+    
     this.mostrarPerfiles(this.usuario.perfil.idPerfil);
-    // this.formularioPerfil();
 
   }
 
   mostrarPerfiles(opcion: any) {
     this.gestionGuardiaService.mostrarPerfiles(opcion)
-      .subscribe(data => {
-        this.perfil = data;
-        this.opciones = this.perfil.opciones;
-        console.log(this.perfil);
-        console.log(this.opciones);
+    .subscribe(data =>{
+      this.perfil = data;   //Todos los datos
+      this.opcionesForm = this.perfil.opciones; //Las opciones
+      console.log('Datos del perfil:',this.perfil);
+      // console.log(this.opcionesForm[0].descripcion);
+      // console.log(this.opcionesForm[1].descripcion);
+      
+      this.crearFormularioOpciones(this.perfil);
+      
+      this.opcionesForm.forEach((element, index)=>{
 
-        console.log('Total opciones', typeof (this.perfil.opciones));
+        const opc= this.fb.group({
+          idOpcion:  this.fb.control(this.opcionesForm[index].idOpcion),
+          descripcion: this.fb.control(this.opcionesForm[index].descripcion),
+          componente: this.fb.control(this.opcionesForm[index].componente),
+          idNivelAcceso:  this.fb.control(this.totalIDNivelAcceso),
+          // idNivelAcceso:  this.fb.control(this.opcionesForm[index].idNivelAcceso),
+          lectura: this.fb.control(false),
+          creacion: this.fb.control(false),
+          actualizacion: this.fb.control(false),
+          eliminacion: this.fb.control(false),
 
-        this.opciones.forEach((element, index) => {
-
-            const permisos = new FormGroup({
-              
-              lectura: new FormControl(false),
-              actualizacion: new FormControl(false),
-              creacion: new FormControl(false),
-              eliminacion: new FormControl(false)
-            });
-            
-            //const f = this.form2.get('permisos') as FormArray;
-            //f.push(permiso);
-            this.form1.insert(index, permisos);
-            console.log('hey listen: ', this.form1.value);
-
-            
-          
         });
-        console.log('El bueno: ', this.form1.value);
 
-      }, error => {
-        console.log(error);
+        this.opcionesArray.push(opc);
+
       });
-    console.log('Hola');
-
-  }
-  // Formaulario
-  //aqui
-
-  opcionesGyS(): FormArray {
-    return this.formPerfil.get(this.opciones) as FormArray
-  }
-
-  newOpciones(): FormGroup {
-    return this.fb.group({
-      opciones: this.opciones,
-      permisos: this.fb.array([])
+      
     })
+
   }
 
-  newPermisos(): FormGroup {
-    return this.fb.group({
-      // lectura: new 
+
+  getEmpleadoData(idEmpleado:number){
+    this.gestionUsuarioService.getValidarEmpleado(idEmpleado)
+      .subscribe(data=>{
+        this.empleado = data;
+        console.log(this.empleado);
+        
+      },error=>{
+        console.log(error);
+        
+      })
+
+  }
+
+  // Creacion del formluario
+  crearFormularioOpciones(data:any){
+
+    this.formOpciones = this.fb.group({
+      descripcion:[data.descripcion, [Validators.required, Validators.minLength(4)]],
+      idPerfil:[data.idPerfil,[Validators.required]],
+      opciones: this.fb.array([])
     })
+
+    
   }
 
-  get permisos(): FormArray {
-    return this.form1.get('permisos') as FormArray;
+  get opcionesArray(): FormArray {
+    return this.formOpciones.get('opciones') as FormArray;
   }
 
-  // Checkbox para asignarle permisos por opcion
-  permisoLectura() {
-    this.actLectura = !this.actLectura;
-    this.valorLectura = this.valorLectura * (-1);
-
-  }
-
-  permisoActualizacion() {
-    this.actActualizacion = !this.actActualizacion;
-    if (this.actActualizacion == true) {
-      this.valorActualizacion = this.valorActualizacion * (-1);
+  permisoLectura(i:number) {
+    console.log(i);
+    let permisoLectura = this.formOpciones.get('opciones')?.value[i].lectura;
+    // console.log('Su permiso esta:',permisoLectura);
+    permisoLectura = !permisoLectura;
+  
+    if(permisoLectura){
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
+      console.log(b+' '+desc);
+      b = b + this.valorLectura;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    } else {
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      b = b - this.valorLectura;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     }
   }
 
-  permisoCreacion() {
-    this.actCreacion = !this.actCreacion;
-    if (this.actCreacion == true) {
-      this.valorCreacion = this.valorCreacion * (-1);
+  permisoActualizacion(i:number) {
+    console.log(i);
+    let permisoActualizacion = this.formOpciones.get('opciones')?.value[i].actualizacion;
+    // console.log('Su permiso esta:',permisoActualizacion);
+    permisoActualizacion = !permisoActualizacion;
+  
+    if(permisoActualizacion){
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
+      console.log(b+' '+desc);
+      b = b + this.valorActualizacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    } else {
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      b = b - this.valorActualizacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    }
+    // }
+  }
+
+  permisoCreacion(i:number) {
+
+    console.log(i);
+    let permisoCreacion = this.formOpciones.get('opciones')?.value[i].creacion;
+    // console.log('Su permiso esta:',permisoCreacion);
+    permisoCreacion = !permisoCreacion;
+  
+    if(permisoCreacion){
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
+      console.log(b+' '+desc);
+      b = b + this.valorCreacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    } else {
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      b = b - this.valorCreacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     }
   }
 
-  permisoEliminacion() {
-    this.actEliminacion = !this.actEliminacion;
-    if (this.actEliminacion == true) {
-      this.valorEliminacion = this.valorEliminacion * (-1);
+  permisoEliminacion(i:number) {
+
+    console.log(i);
+    let permisoEliminacion = this.formOpciones.get('opciones')?.value[i].eliminacion;
+    // console.log('Su permiso esta:',permisoEliminacion);
+    permisoEliminacion = !permisoEliminacion;
+  
+    if(permisoEliminacion){
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
+      console.log(b+' '+desc);
+      b = b + this.valorEliminacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
+    } else {
+      let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      b = b - this.valorEliminacion;
+      (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     }
   }
+
+  enviarDatos(){
+    console.log('Formulario:',this.formOpciones.value.opciones);
+
+    // console.log('Opciones de perfil:',this.opciones);
+    
+    // alert('Fromulario:' + JSON.stringify(this.formOpciones.value.opciones))
+    let usuario: Usuario;
+    usuario={
+      clave:this.usuario.clave,
+      password:this.usuario.contrasena,
+      empleado: this.empleado,
+      perfiles:[
+        {
+          idPerfil: this.usuario.perfil.idPerfil,
+          descripcion: this.perfil.descripcion,
+          opciones: this.formOpciones.value.opciones
+        }
+      ]
+      // Falta el apartado de usuarios[]
+    };
+
+    console.log(JSON.stringify(usuario));
+    // console.log(usuario);
+    
+  }
+
 }

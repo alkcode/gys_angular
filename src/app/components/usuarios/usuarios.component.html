@@ -21,11 +21,11 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let usuario of usuarios" class="table-active">
-                        <td>{{usuario.idUsuario}}</td>
+                        <!-- <td>{{usuario.idUsuario}}</td> -->
                         <td>{{usuario.clave}}</td>
                         <td>{{usuario.password}}</td>
                         <!-- <td><a (click)="editUsuario(usuario.idUsuario)"></a></td> -->
-                        <td><a [routerLink]="['/modificar-usuario',usuario.idUsuario]">Editar</a></td>
+                        <!-- <td><a [routerLink]="['/modificar-usuario',usuario.idUsuario]">Editar</a></td> -->
                         <!-- <td><a (click)="deleteUsuario(usuario.idUsuario)">Eliminar</a></td> -->
                       </tr>
                     </tbody>
