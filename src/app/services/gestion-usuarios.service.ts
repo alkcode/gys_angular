@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
 import { Empleado } from '../interfaces/empleado';
 import { Usuario } from '../interfaces/usuario';
+import { ajax } from 'rxjs/ajax'
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,18 @@ export class GestionUsuariosService {
       // return this.http.get(this.baseUrl+'perfiles',{headers});
       const llenarSelect$= this.http.get<any>(`${this.baseUrl}perfiles`)
       return llenarSelect$;
-     
-    // return this.http.get(this.baseUrl+'perfiles');
+    // const rellenar = ajax.getJSON(`${this.baseUrl}perfiles`);
+    // const llenarSelect$= new Observable(obs=>{
+    //   rellenar.subscribe((res)=>{
+    //     obs.next(res);
+    //     obs.complete();
+
+    //     },(err)=>{
+    //       obs.error(err);
+    //     }
+    //   );
+    //  });
+    //  return llenarSelect$;
   }
 
 

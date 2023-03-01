@@ -41,7 +41,7 @@ export class GestionUsuariosComponent {
       clave: ['jamh', [Validators.required, Validators.minLength(4)]],
       contrasena: ['1111111', [Validators.required, Validators.minLength(6)]],
       contrasena2: ['1111111', [Validators.required, Validators.minLength(6)]],
-      empleado:['', {
+      empleado:['309015', {
         validators:[Validators.required, Validators.minLength(6)],
         asyncValidators: [
           this.empleadoCheck(this.gestionUsuarioService)

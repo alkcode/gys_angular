@@ -18,17 +18,17 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-check">
-                                    <input (click)="permisoActualizacion(i)" class="form-check-input" type="checkbox" value="2" id="check{{i}}" formControlName="actualizacion">
+                                    <input (click)="permisoCreacion(i)" class="form-check-input" type="checkbox" value="4" id="check{{i}}" formControlName="creacion">
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        Actualización
+                                        Creación
                                     </label>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-check">
-                                    <input (click)="permisoCreacion(i)" class="form-check-input" type="checkbox" value="4" id="check{{i}}" formControlName="creacion">
+                                    <input (click)="permisoActualizacion(i)" class="form-check-input" type="checkbox" value="2" id="check{{i}}" formControlName="actualizacion">
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        Creación
+                                        Actualización
                                     </label>
                                 </div>
                             </div>
@@ -50,5 +50,8 @@
             </form>
         </div>
     </div>
+    <pre>
+        {{this.formOpciones.value.opciones | json}}
+    </pre>
 </div>
 

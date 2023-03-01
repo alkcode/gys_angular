@@ -18,4 +18,8 @@ https://es.stackoverflow.com/questions/347769/como-acceder-al-valor-de-un-item-e
 https://juliescript.dev/formularios-dinamicos-angular/
 
 
+<!-- Guia http -->
+https://angular.io/guide/http
+
+
 https://www.delftstack.com/es/howto/javascript/javascript-remove-object-from-array/ -->crear un array nuevo

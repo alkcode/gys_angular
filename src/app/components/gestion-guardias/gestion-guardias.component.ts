@@ -6,7 +6,7 @@ import { GestionUsuariosService } from 'src/app/services/gestion-usuarios.servic
 import { Empleado, EmpleadoClass } from 'src/app/interfaces/empleado';
 import { Usuario, UsuarioClass } from 'src/app/interfaces/usuario';
 import { Opcion } from 'src/app/interfaces/opcion';
-// import { CommonModule } from '@angular/common';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-gestion-guardias',
@@ -21,13 +21,13 @@ export class GestionGuardiasComponent {
   empleado: Empleado =  new EmpleadoClass;
   usuarioData: Usuario = new UsuarioClass;
 
-  opcionesAux:any[]=[];
+  opciones:Opcion[]=[];
 
   opcionesForm: any[] = [];
 
   private valorLectura: number = 1;
-  private valorActualizacion: number = 2;
-  private valorCreacion: number = 4;
+  private valorCreacion: number = 2;
+  private valorActualizacion: number = 4;
   private valorEliminacion: number = 8;
 
   totalIDNivelAcceso:number = 0;
@@ -38,6 +38,7 @@ export class GestionGuardiasComponent {
 
   constructor(private gestionGuardiaService: GestionGuardiasService,
               private gestionUsuarioService: GestionUsuariosService,
+              private usuarioService:UsuarioService,
               private fb: FormBuilder) {
     // this.formularioPerfil();
   }
@@ -124,7 +125,7 @@ export class GestionGuardiasComponent {
     if(permisoLectura){
       let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
       let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
-      console.log(b+' '+desc);
+      // console.log(b+' '+desc);
       b = b + this.valorLectura;
       (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     } else {
@@ -143,7 +144,7 @@ export class GestionGuardiasComponent {
     if(permisoActualizacion){
       let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
       let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
-      console.log(b+' '+desc);
+      // console.log(b+' '+desc);
       b = b + this.valorActualizacion;
       (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     } else {
@@ -164,7 +165,7 @@ export class GestionGuardiasComponent {
     if(permisoCreacion){
       let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
       let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
-      console.log(b+' '+desc);
+      // console.log(b+' '+desc);
       b = b + this.valorCreacion;
       (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     } else {
@@ -184,7 +185,7 @@ export class GestionGuardiasComponent {
     if(permisoEliminacion){
       let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
       let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
-      console.log(b+' '+desc);
+      // console.log(b+' '+desc);
       b = b + this.valorEliminacion;
       (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     } else {
@@ -195,28 +196,43 @@ export class GestionGuardiasComponent {
   }
 
   enviarDatos(){
+
+    this.formOpciones.value.opciones.forEach((element:any, index:any)=>{
+      console.log(index, typeof(element));
+      delete element.lectura;
+      delete element.actualizacion;
+      delete element.creacion;  
+      delete element.eliminacion;
+      console.log(element);
+      this.opciones.push(element);
+    });
+
+    console.log('Arreglo final:',this.opciones);
+    
+
     console.log('Formulario:',this.formOpciones.value.opciones);
 
-    // console.log('Opciones de perfil:',this.opciones);
-    
-    // alert('Fromulario:' + JSON.stringify(this.formOpciones.value.opciones))
     let usuario: Usuario;
     usuario={
       clave:this.usuario.clave,
       password:this.usuario.contrasena,
       empleado: this.empleado,
       perfiles:[
-        {
+        { 
           idPerfil: this.usuario.perfil.idPerfil,
           descripcion: this.perfil.descripcion,
-          opciones: this.formOpciones.value.opciones
+          opciones: this.opciones
+          // opciones: this.formOpciones.value.opciones
         }
       ]
-      // Falta el apartado de usuarios[]
     };
 
-    console.log(JSON.stringify(usuario));
-    // console.log(usuario);
+    // this.usuarioService.saveUsuario(usuario)
+    //   .subscribe(usu=>{
+    //     console.log('Usuario creado:',usu);
+        
+    //   })
+    console.log('JSON Final:',usuario);
     
   }
 
