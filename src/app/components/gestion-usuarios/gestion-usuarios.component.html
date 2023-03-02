@@ -56,7 +56,7 @@
                         <div class="col-lg-9 col-md-12 mb-3">
                             <select class="form-select" formControlName="perfil" aria-label="Default select example" (change)="test()">
                                 <option [ngValue]="null" disabled class="text-center">Asigne un perfil</option>
-                                <option *ngFor="let per of listaPerfiles" [ngValue]="per">{{per.descripcion}}</option>
+                                <option *ngFor="let per of listaPerfiles" [ngValue]="per.idPerfil">{{per.descripcion}}</option>
                             </select>
                         </div>
                     </form>
@@ -70,12 +70,13 @@
                     </div>
                 </div>
             </div>
-            <!-- {{formUsuario.value | json}} -->
+            {{formUsuario.value | json}}
             <hr>
             
             <div *ngIf="formUsuario.valid">
                 <app-gestion-guardias
                     [usuario]="formUsuario.value"
+
                     
                     ></app-gestion-guardias>
             </div>

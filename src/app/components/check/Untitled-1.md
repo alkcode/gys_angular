@@ -23,3 +23,9 @@ https://angular.io/guide/http
 
 
 https://www.delftstack.com/es/howto/javascript/javascript-remove-object-from-array/ -->crear un array nuevo
+
+
+
+<!-- Formularios reactivos -->
+
+https://angular.io/guide/reactive-forms

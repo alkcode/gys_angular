@@ -22,7 +22,8 @@ export class UsuarioService {
 
   getUsuario(id:Number):Observable<Usuario>{
     // return this.http.get<Usuario>(`${this.url}usuarios/${id}`);
-    const usuario$ = this.http.get<Usuario>(`${this.url}usuarios/${id}`);
+    const usuario$ = this.http.get<Usuario>(`${this.url}usuarios/${id}?conPerfiles=true`);
+    // const usuario$ = this.http.get<Usuario>(`${this.url}permisos_usuario/${id}`);
     return usuario$;
   }
 

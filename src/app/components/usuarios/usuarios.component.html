@@ -20,12 +20,16 @@
                       <!-- <th>Eliminar</th> -->
                     </thead>
                     <tbody>
-                      <tr *ngFor="let usuario of usuarios" class="table-active">
-                        <!-- <td>{{usuario.idUsuario}}</td> -->
+                      <tr *ngFor="let usuario of usuarios; index as i" class="table-active">
+                        <td>{{usuario.idUsuario}}</td>
                         <td>{{usuario.clave}}</td>
+                        <!-- <td *ngFor="let kv of usuario.empleado | keyvalue">
+                          <div>{{kv.key[1]}}:{{kv.value}}</div>
+                        </td> -->
                         <td>{{usuario.password}}</td>
+                        
                         <!-- <td><a (click)="editUsuario(usuario.idUsuario)"></a></td> -->
-                        <!-- <td><a [routerLink]="['/modificar-usuario',usuario.idUsuario]">Editar</a></td> -->
+                        <td><a class="btn btn-warning" [routerLink]="['/modificar-usuario',usuario.idUsuario]">Editar</a></td>
                         <!-- <td><a (click)="deleteUsuario(usuario.idUsuario)">Eliminar</a></td> -->
                       </tr>
                     </tbody>

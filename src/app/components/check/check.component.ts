@@ -81,7 +81,18 @@ export class CheckComponent {
     
   }
 
+  get descripcionControl(): FormControl{
+    console.log('MIRAAAAAAAAAAAAAAAMEEEEEEEEEEEEEEEEEEEEEEEEEE',this.formOpciones.get('descripcion') as FormControl);
+    return this.formOpciones.get('descripcion') as FormControl;
+  }
+
+  get idPerfilControl():FormControl{
+    console.log('MIRAAAAAAAAAAAAAAAMEEEEEEEEEEEEEEEEEEEEEEEEEE',this.formOpciones.get('idPerfil') as FormControl);
+    return this.formOpciones.get('idPerfil') as FormControl;
+  }
+
   get opcionesArray(): FormArray {
+    // console.log('MIRAAAAAAAAAAAAAAAMEEEEEEEEEEEEEEEEEEEEEEEEEE',this.formOpciones.get('opciones') as FormArray);
     return this.formOpciones.get('opciones') as FormArray;
   }
 

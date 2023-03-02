@@ -48,7 +48,7 @@ export class GestionGuardiasComponent {
     console.log('Hola:',this.usuario);
     this.getEmpleadoData(this.usuario.empleado);
     
-    this.mostrarPerfiles(this.usuario.perfil.idPerfil);
+    this.mostrarPerfiles(this.usuario.perfil);
 
   }
 
@@ -227,11 +227,11 @@ export class GestionGuardiasComponent {
       ]
     };
 
-    // this.usuarioService.saveUsuario(usuario)
-    //   .subscribe(usu=>{
-    //     console.log('Usuario creado:',usu);
+    this.usuarioService.saveUsuario(usuario)
+      .subscribe(usu=>{
+        console.log('Usuario creado:',usu);
         
-    //   })
+      })
     console.log('JSON Final:',usuario);
     
   }
