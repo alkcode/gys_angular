@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, Router, TitleStrategy} from '@angular/router';
 import { map, tap } from 'rxjs/operators';
+import { Empleado, EmpleadoClass } from 'src/app/interfaces/empleado';
 import { Opcion } from 'src/app/interfaces/opcion';
 import { Perfil, PerfilClass } from 'src/app/interfaces/perfiles';
 import { Usuario, UsuarioClass } from 'src/app/interfaces/usuario';
@@ -21,6 +22,7 @@ export class EditarUsuarioComponent implements OnInit{
   usuarioEdit: Usuario = new UsuarioClass;
   perfil: Perfil = new PerfilClass;
   opciones: Opcion[] = [];
+  empleado: Empleado = new EmpleadoClass; 
 
   listaPerfiles: any[] = [];
 
@@ -41,7 +43,7 @@ export class EditarUsuarioComponent implements OnInit{
     const id = this.activatedRoute.snapshot.params["id"];
     // console.log(id);
     
-    this.formulario();
+    // this.formulario();
     this.callDataUsuario(id)
     this.llenarSelect();
 
@@ -49,33 +51,142 @@ export class EditarUsuarioComponent implements OnInit{
 
 // Llamada y llenado de los datos del formulario
 callDataUsuario(id:number){
+  // this.formEditUsuario = this.fb.group({
+  //   idUsuario: this.fb.control('',[Validators.required]),
+  //   clave: this.fb.control('', [Validators.required, Validators.minLength(4)]),
+  //   password: this.fb.control('', [Validators.required, Validators.minLength(6)]),
+  //   contrasena2: this.fb.control('', [Validators.required, Validators.minLength(6)]),
+  //   empleado: this.fb.group({
+  //     id_sociedad: this.fb.control('',[Validators.required]),
+  //     id_empleado: this.fb.control('', {
+  //       validators:[Validators.required, Validators.minLength(6)],
+  //       asyncValidators: [
+  //         this.empleadoCheck(this.gestionUsuarioService)
+  //       ],
+  //       updateOn: 'blur'
+  //     }),
+  //     nombre: this.fb.control('',[Validators.required]), //['',[Validators.required]],
+  //     apellido_1: this.fb.control('',[Validators.required]),
+  //     apellido_2: this.fb.control('',[Validators.required]),
+  //     id_legal: this.fb.control('',[Validators.required])
+  //   }),
+  //   perfiles: this.fb.array([
+  //     this.fb.group({
+  //       idPerfil: this.fb.control('', [Validators.required]),
+  //       descripcion: this.fb.control('', [Validators.required]),
+  //       opciones: this.fb.array([])
+  //     })
+  //   ])
+  // },{
+  //   validators: this.validators.validarPassword('contrasena', 'contrasena2')
+  // });
+
+
+  this.formulario();
+
+
+
   this.usuarioService.getUsuario(id)
       .subscribe(res =>{
         
         this.usuarioEdit = res;
 
+        // this.formEditUsuario.patchValue(this.usuarioEdit);
+        // this.formEditUsuario.controls['contrasena2'].setValue(this.usuarioEdit.password)
+        // this.formEditUsuario.controls['perfil'].setValue(this.perfil?.idPerfil)
+
+        this.formEditUsuario.controls['idUsuario'].setValue(this.usuarioEdit.idUsuario)
+        this.formEditUsuario.controls['clave'].setValue(this.usuarioEdit.clave)
+        this.formEditUsuario.controls['password'].setValue(this.usuarioEdit.password)
+        this.formEditUsuario.controls['contrasena2'].setValue(this.usuarioEdit.password)
+        this.formEditUsuario.controls['empleado'].setValue(this.usuarioEdit.empleado)
+        
+
         this.usuarioEdit.perfiles?.forEach((perfil,index)=>{
           this.perfil = perfil;
-        })
-
-
-        // this.opciones = this.perfil?.opciones;
-
-        console.log('Este es el perfil',this.perfil.opciones);
-        
-        // console.log('Estos son los perfiles',this.usuarioEdit.perfiles);
-        // console.log('VER',this.usuarioEdit);
-
-        this.formEditUsuario.controls['clave'].setValue(this.usuarioEdit.clave)
-        this.formEditUsuario.controls['contrasena'].setValue(this.usuarioEdit.password)
-        this.formEditUsuario.controls['contrasena2'].setValue(this.usuarioEdit.password)
-        this.formEditUsuario.controls['empleado'].setValue(this.usuarioEdit.empleado?.id_empleado)
-        this.formEditUsuario.controls['perfil'].setValue(this.perfil?.idPerfil)
-
-        this.perfil.opciones.forEach((opc, index)=>{
-          // console.log(opc.componente+' '+opc.descripcion);
+          console.log('Prueba',this.perfil.opciones[1].descripcion);
           
+          
+          const per = this.fb.group({
+            idPerfil: this.fb.control(this.perfil.idPerfil, [Validators.required]),
+            descripcion: this.fb.control(this.perfil.descripcion, [Validators.required]),
+            opciones: this.fb.array([
+
+            //   this.perfil.opciones.forEach((opcion, index)=>{
+
+            //     // console.log(this.opciones[index].componente);
+                
+                
+            //     const opc= this.fb.group({
+      
+            //       idOpcion:  this.fb.control(this.perfil.opciones[index].idOpcion),
+            //       descripcion: this.fb.control(this.perfil.opciones[index].descripcion),
+            //       componente: this.fb.control(this.perfil.opciones[index].componente),
+            //       idNivelAcceso: this.fb.control(0),
+            //       lectura: this.fb.control(false),
+            //       creacion: this.fb.control(false),
+            //       actualizacion: this.fb.control(false),
+            //       eliminacion: this.fb.control(false),
+        
+            //     });
+        
+            //     this.opcionesArray.push(opc);
+                
+            //   })
+
+            ])
+
+          });
+
+          this.perfilesArray.push(per);
+
         })
+
+        // console.log('controls de perfiles',this.formEditUsuario.controls['perfiles']);
+        
+        // this.formEditUsuario.controls['perfiles'].patchValue(this.perfil.idPerfil);
+
+        // console.log('Este es el pe4rfil bueno',this.perfil);
+
+        
+        // let data = this.formEditUsuario.get('perfiles');
+        // console.log('Datos de get', data);
+
+        // let data2 = this.formEditUsuario.controls['perfiles'];
+        // console.log('Datos de controls', data2);
+        
+        const perfiles = this.formEditUsuario.controls['opciones'];
+        console.log(perfiles);
+        
+
+        // console.log('Son las opciones del perfil',this.perfil.opciones);
+        this.opciones = this.perfil.opciones;
+
+        this.opciones.forEach((opcion, index)=>{
+
+          console.log(this.opciones[index].componente);
+          
+          
+          const opc= this.fb.group({
+
+            idOpcion:  this.fb.control(this.opciones[index].idOpcion),
+            descripcion: this.fb.control(this.opciones[index].descripcion),
+            componente: this.fb.control(this.opciones[index].componente),
+            idNivelAcceso: this.fb.control(0),
+            lectura: this.fb.control(false),
+            creacion: this.fb.control(false),
+            actualizacion: this.fb.control(false),
+            eliminacion: this.fb.control(false),
+  
+          });
+  
+          this.opcionesArray.push(opc);
+          
+        });
+
+        
+
+        
         
 
       },err=>{
@@ -84,22 +195,63 @@ callDataUsuario(id:number){
       })
 }
 
+get perfilesArray(): FormArray {
+  // console.log('-------------->',this.formEditUsuario.get('perfiles') as FormArray);
+  return this.formEditUsuario.get('perfiles') as FormArray;
+}
+
+get opcionesArray(): FormArray {
+  console.log('-------------->',this.formEditUsuario.get('empleado') as FormArray);
+  
+  return this.formEditUsuario.get('opciones') as FormArray;
+}
+
+
 // Crear formulario
   formulario(){
     this.formEditUsuario = this.fb.group({
-      clave: ['', [Validators.required, Validators.minLength(4)]],
-      contrasena: ['', [Validators.required, Validators.minLength(6)]],
-      contrasena2: ['', [Validators.required, Validators.minLength(6)]],
-      empleado:['', {
-        validators:[Validators.required, Validators.minLength(6)],
-        asyncValidators: [
-          this.empleadoCheck(this.gestionUsuarioService)
-        ],
-        updateOn: 'blur'
-      }],
-      perfil: [null, [Validators.required]]
+      idUsuario: this.fb.control('',[Validators.required]),
+      clave: this.fb.control('', [Validators.required, Validators.minLength(4)]),
+      password: this.fb.control('', [Validators.required, Validators.minLength(6)]),
+      contrasena2: this.fb.control('', [Validators.required, Validators.minLength(6)]),
+      empleado: this.fb.group({
+        id_sociedad: this.fb.control('',[Validators.required]),
+        id_empleado: this.fb.control('', {
+          validators:[Validators.required, Validators.minLength(6)],
+          asyncValidators: [
+            this.empleadoCheck(this.gestionUsuarioService)
+          ],
+          updateOn: 'blur'
+        }),
+        nombre: this.fb.control('',[Validators.required]), //['',[Validators.required]],
+        apellido_1: this.fb.control('',[Validators.required]),
+        apellido_2: this.fb.control('',[Validators.required]),
+        id_legal: this.fb.control('',[Validators.required])
+      }),
+      // empleado:['', {
+      //   validators:[Validators.required, Validators.minLength(6)],
+      //   asyncValidators: [
+      //     this.empleadoCheck(this.gestionUsuarioService)
+      //   ],
+      //   updateOn: 'blur'
+      // }],
+      perfiles: this.fb.array([
+        // this.fb.group({
+        //   idPerfil: this.fb.control('', [Validators.required]),
+        //   descripcion: this.fb.control('', [Validators.required]),
+        //   opciones: this.fb.array([
+        //     // this.fb.group({
+        //     //   idOpcion: this.fb.control('', [Validators.required]),
+        //     //   descripcion: this.fb.control('', [Validators.required]),
+        //     //   componente: this.fb.control('', [Validators.required]),
+        //     //   idNivelAcceso: this.fb.control('', [Validators.required]),
+        //     // })
+        //   ])
+        // })
+      ])
+      // this.fb.array([])   
     },{
-      validators: this.validators.validarPassword('contrasena', 'contrasena2')
+      validators: this.validators.validarPassword('password', 'contrasena2')
     });
     
     
@@ -146,5 +298,10 @@ callDataUsuario(id:number){
         )
       }
   
+    }
+
+    enviar(){
+      console.log(this.formEditUsuario.value);
+      
     }
   }

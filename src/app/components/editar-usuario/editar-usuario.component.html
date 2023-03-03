@@ -18,7 +18,7 @@
                         </div>
                         
                         <div class="col-lg-9 col-md-12 mb-1">
-                            <input class="form-control" [type]="mostrarContrasena ? 'text' : 'password'" id="contrasena" name="contrasena" formControlName="contrasena" placeholder="Contraseña">
+                            <input class="form-control" [type]="mostrarContrasena ? 'text' : 'password'" id="contrasena" name="contrasena" formControlName="password" placeholder="Contraseña">
                             <div *ngIf="campoNoValido('contrasena')" class="alert alert-danger" role="alert">
                                 La contraseña debe tener al menos 6 caracteres
                             </div>
@@ -48,17 +48,22 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-9 col-md-12 mb-3">
-                            <input class="form-control" type="text" id="empleado" name="empleado" formControlName="empleado" placeholder="Empleado">
+                        <div formGroupName="empleado">
+                            <div class="col-lg-9 col-md-12 mb-3">
+                                <input class="form-control" type="text" id="empleado" name="empleado" formControlName="id_empleado" placeholder="Empleado">
+                            </div>
                         </div>
-                        <div class="col-lg-9 col-md-12 mb-3">
+
+                        <!-- <div class="col-lg-9 col-md-12 mb-3">
                             <select class="form-select" formControlName="perfil" aria-label="Default select example">
                                 <option [ngValue]="null" disabled class="text-center">Asigne un perfil</option>
                                 <option *ngFor="let per of listaPerfiles" [ngValue]="per.idPerfil">{{per.descripcion}}</option>
                             </select>
-                        </div>
+                        </div> -->
                         <hr>
 
+                        <!-- Boton de prueba -->
+                        <button type="submit" (click)="enviar()">Enviar</button>
                         
                     </form>
                 </div>
@@ -71,7 +76,9 @@
                     </div>
                 </div> -->
             </div>
-            {{formEditUsuario.value | json}}
+            <pre>
+                {{formEditUsuario.value | json}}
+            </pre>
 
             
             <!-- <div *ngIf="formUsuario.valid">

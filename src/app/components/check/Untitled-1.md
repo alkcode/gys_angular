@@ -29,3 +29,5 @@ https://www.delftstack.com/es/howto/javascript/javascript-remove-object-from-arr
 <!-- Formularios reactivos -->
 
 https://angular.io/guide/reactive-forms
+
+https://stackoverflow.com/questions/42968619/how-to-use-array-of-objects-for-controls-in-reactive-forms

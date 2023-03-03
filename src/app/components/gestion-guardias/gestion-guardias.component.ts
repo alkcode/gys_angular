@@ -81,6 +81,17 @@ export class GestionGuardiasComponent {
         this.opcionesArray.push(opc);
 
       });
+
+       // let data = this.formEditUsuario.get('perfiles');
+        // console.log('Datos de get', data);
+
+        // let data2 = this.formOpciones.controls['opciones'];
+        // console.log('Datos de controls', data2);
+
+        let data3 = this.opcionesArray.controls;
+        console.log('Controls generico',data3);
+        
+        
       
     })
 
@@ -112,7 +123,7 @@ export class GestionGuardiasComponent {
     
   }
 
-  get opcionesArray(): FormArray {
+  get opcionesArray(){
     return this.formOpciones.get('opciones') as FormArray;
   }
 
@@ -227,11 +238,11 @@ export class GestionGuardiasComponent {
       ]
     };
 
-    this.usuarioService.saveUsuario(usuario)
-      .subscribe(usu=>{
-        console.log('Usuario creado:',usu);
+    // this.usuarioService.saveUsuario(usuario)
+    //   .subscribe(usu=>{
+    //     console.log('Usuario creado:',usu);
         
-      })
+    //   })
     console.log('JSON Final:',usuario);
     
   }
