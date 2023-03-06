@@ -91,8 +91,6 @@ export class GestionGuardiasComponent {
         let data3 = this.opcionesArray.controls;
         console.log('Controls generico',data3);
         
-        
-      
     })
 
   }
