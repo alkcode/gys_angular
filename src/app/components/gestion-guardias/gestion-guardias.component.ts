@@ -133,9 +133,13 @@ export class GestionGuardiasComponent {
   
     if(permisoLectura){
       let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
+      console.log(b);
+      
       let desc = this.formOpciones.get('opciones')?.value[i].descripcion;
       // console.log(b+' '+desc);
       b = b + this.valorLectura;
+      console.log('Este es el importante',(this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso'));
+      
       (this.formOpciones.get('opciones') as FormArray).at(i).get('idNivelAcceso')?.patchValue(b);
     } else {
       let b = this.formOpciones.get('opciones')?.value[i].idNivelAcceso;
