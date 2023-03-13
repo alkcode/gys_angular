@@ -31,9 +31,9 @@ export class UsuarioService {
     return this.http.post<Usuario>(`${this.url}usuarios`, usuario);
   }
 
-  // updateUsuario(usuario:Usuario):Observable<Usuario>{
-  //   return this.http.put<Usuario>(`${this.url}usuarios/${usuario.idUsuario}`, usuario);
-  // }
+  updateUsuario(id:Number,usuario:Usuario):Observable<Usuario>{
+    return this.http.put<Usuario>(`${this.url}usuarios/${id}`, usuario);
+  }
 
   deleteUsuario(id:Number,usuario:Usuario):Observable<Usuario>{
     return this.http.delete<Usuario>(`${this.url}usuarios/${id}`);

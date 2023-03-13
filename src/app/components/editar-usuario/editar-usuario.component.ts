@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ActivatedRoute, Router, TitleStrategy} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { Empleado, EmpleadoClass } from 'src/app/interfaces/empleado';
 import { Opcion } from 'src/app/interfaces/opcion';
@@ -20,9 +20,13 @@ export class EditarUsuarioComponent implements OnInit{
   formEditUsuario: FormGroup = new FormGroup({});
 
   usuarioEdit: Usuario = new UsuarioClass;
+  usuarioAct: Usuario = new UsuarioClass;
+
   perfil: Perfil = new PerfilClass;
   opciones: Opcion[] = [];
   empleado: Empleado = new EmpleadoClass; 
+
+  private id:number = this.activatedRoute.snapshot.params["id"];
 
   listaPerfiles: any[] = [];
 
@@ -43,6 +47,7 @@ export class EditarUsuarioComponent implements OnInit{
 
 
   usuario: Usuario | undefined;
+  idNivAcceso: Number | undefined;
   constructor(private fb:FormBuilder,
               private usuarioService:UsuarioService,
               private gestionUsuarioService:GestionUsuariosService,
@@ -53,19 +58,17 @@ export class EditarUsuarioComponent implements OnInit{
   
   ngOnInit(): void {   
 
-    const id = this.activatedRoute.snapshot.params["id"];
+    // const id = this.activatedRoute.snapshot.params["id"];
     // console.log(id);
     
     this.formulario();
-    this.callDataUsuario(id)
+    this.callDataUsuario(this.id)
     this.llenarSelect();
 
   }
 
 // Llamada y llenado de los datos del formulario
-callDataUsuario(id:number){
-
-  // this.formulario();
+  callDataUsuario(id:number){
 
   this.usuarioService.getUsuario(id)
       .subscribe(res =>{
@@ -86,10 +89,7 @@ callDataUsuario(id:number){
           const per = this.fb.group({
             idPerfil: this.fb.control(this.perfil.idPerfil, [Validators.required]),
             descripcion: this.fb.control(this.perfil.descripcion, [Validators.required]),
-            opciones: this.fb.array([
-
-            ])
-
+            opciones: this.fb.array([])
           });
 
           this.perfilesArray.push(per);
@@ -99,116 +99,14 @@ callDataUsuario(id:number){
           // console.log('IMPORTANTE!!!!!!!!',this.perfil.opciones);
 
           this.perfil.opciones.forEach((opcion, index)=>{
-            // if(this.perfil.opciones[index].idNivelAcceso){
-              console.log('Se puede manupilar en nivel de acceso');
-              switch(this.perfil.opciones[index].idNivelAcceso){
-                case 0: 
-                  this.statusLectura=false;
-                  this.statusCreacion=false;
-                  this.statusActualizacion=false;
-                  this.statusEliminacion=false;
-                break;
-                case 1: 
-                  this.statusLectura=true;
-                  this.statusCreacion=false;
-                  this.statusActualizacion=false;
-                  this.statusEliminacion=false;
-                break;
-                case 2: 
-                  this.statusLectura=false;
-                  this.statusCreacion=true;
-                  this.statusActualizacion=false;
-                  this.statusEliminacion=false;
-                break;
-                case 3: 
-                  this.statusLectura=true;
-                  this.statusCreacion=true;
-                  this.statusActualizacion=false;
-                  this.statusEliminacion=false;
-                break;
-                case 4: 
-                  this.statusLectura=false;
-                  this.statusCreacion=false;
-                  this.statusActualizacion=true;
-                  this.statusEliminacion=false;
-                break;
-                case 5: 
-                  this.statusLectura=true;
-                  this.statusCreacion=false;
-                  this.statusActualizacion=true;
-                  this.statusEliminacion=false;
-                break;
-                case 6: 
-                  this.statusLectura=false;
-                  this.statusCreacion=true;
-                  this.statusActualizacion=true;
-                  this.statusEliminacion=false;
-                break;
-                case 7: 
-                  this.statusLectura=true;
-                  this.statusCreacion=true;
-                  this.statusActualizacion=true;
-                  this.statusEliminacion=false;
-                break;
-                case 8: 
-                  this.statusLectura=false;
-                  this.statusCreacion=false;
-                  this.statusActualizacion=false;
-                  this.statusEliminacion=true;
-                break;
-                case 9: 
-                  this.statusLectura=true;
-                  this.statusCreacion=false;
-                  this.statusActualizacion=false;
-                  this.statusEliminacion=true;
-                break;
-                case 10: 
-                  this.statusLectura=false;
-                  this.statusCreacion=true;
-                  this.statusActualizacion=false;
-                  this.statusEliminacion=true;
-                break;
-                case 11: 
-                  this.statusLectura=true;
-                  this.statusCreacion=true;
-                  this.statusActualizacion=false;
-                  this.statusEliminacion=true;
-                break;
-                case 12: 
-                  this.statusLectura=false;
-                  this.statusCreacion=false;
-                  this.statusActualizacion=true;
-                  this.statusEliminacion=true;
-                break;
-                case 13: 
-                  this.statusLectura=true;
-                  this.statusCreacion=false;
-                  this.statusActualizacion=true;
-                  this.statusEliminacion=true;
-                break;
-                case 14: 
-                  this.statusLectura=false;
-                  this.statusCreacion=true;
-                  this.statusActualizacion=true;
-                  this.statusEliminacion=true;
-                break;
-                case 15: 
-                  this.statusLectura=true;
-                  this.statusCreacion=true;
-                  this.statusActualizacion=true;
-                  this.statusEliminacion=true;
-                break;
-                default:
-                  this.statusLectura=false;
-                  this.statusCreacion=false;
-                  this.statusActualizacion=false;
-                  this.statusEliminacion=false;
-                break;
 
-              // }
-              
-            }
-          
+            console.log(index);
+
+            this.statusLectura = ((Number(this.perfil.opciones[index].idNivelAcceso) & this.valorLectura) == this.valorLectura);
+            this.statusCreacion = ((Number(this.perfil.opciones[index].idNivelAcceso) & this.valorCreacion) == this.valorCreacion);
+            this.statusActualizacion = ((Number(this.perfil.opciones[index].idNivelAcceso) & this.valorActualizacion) == this.valorActualizacion);
+            this.statusEliminacion = ((Number(this.perfil.opciones[index].idNivelAcceso) & this.valorEliminacion) == this.valorEliminacion);
+
             const opc= this.fb.group({
 
               idOpcion:  this.fb.control(this.perfil.opciones[index].idOpcion),
@@ -230,14 +128,12 @@ callDataUsuario(id:number){
 
       },err=>{
         console.log(err);
-        
       })
 }
 
-get perfilesArray(): FormArray {
-  // console.log('-------------->',(this.formEditUsuario.get('perfiles') as FormArray));
-  return this.formEditUsuario.get('perfiles') as FormArray;
-}
+  get perfilesArray(): FormArray {
+    return this.formEditUsuario.get('perfiles') as FormArray;
+  }
 
 // Crear formulario
   formulario(){
@@ -271,7 +167,7 @@ get perfilesArray(): FormArray {
   }
 
    // Se llena el Select de las opciones de perfil
-   llenarSelect(){
+  llenarSelect(){
     this.gestionUsuarioService.getLlenarSelect()
     .subscribe(data => {
       this.listaPerfiles = data;
@@ -281,7 +177,7 @@ get perfilesArray(): FormArray {
   }
 
    // Funciones para mostrarla contraseña
-   cambiarContrasena() {
+  cambiarContrasena() {
     this.mostrarContrasena = !this.mostrarContrasena;
   }
 
@@ -425,10 +321,23 @@ get perfilesArray(): FormArray {
       
       // console.log(this.formEditUsuario.value);
 
-      this.perfil = this.formEditUsuario.value;
+      this.usuarioAct = this.formEditUsuario.value;
 
-      console.log(this.perfil);
-      
+      console.log(this.usuarioAct);
+
+      // this.formEditUsuario.reset();
+      // this.router.navigate(['/usuarios'])
+
+      // this.usuarioService.updateUsuario(this.id,this.usuarioAct)
+      //     .subscribe(res=>{
+      //       console.log('Usuario actualizado');
+      //       this.router.navigate(['/usuarios'])
+            
+      //     },err=> {
+      //       console.log('Error al actualizar el usuario');
+      //       console.log(err);
+            
+      //     });
       
     }
 

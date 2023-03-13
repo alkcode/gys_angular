@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { User } from '../interfaces/User';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class AuthService {
   constructor(private http:HttpClient) { }
 
   enviarCredenciales(usuario:string, password:string){
-    const body = {usuario, password};
-    return this.http.post(this.URL + 'login', body);
+    // const body = {usuario, password};
+    // return this.http.post(this.URL + 'login', body);
+    return this.http.get<User>(`${this.URL}usuarios/login?clave=${usuario}&password=${password}`)
   }
 }

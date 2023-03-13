@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   formularioLogin: FormGroup = new FormGroup({});
   usuario='';
-  password='';
+  pass='';
 
   errorSession: boolean = false
 
@@ -34,7 +34,7 @@ export class LoginComponent {
     // const body = this.formularioLogin.value;
     // console.log(body);
 
-    console.log(this.formularioLogin.value);
+    // console.log(this.formularioLogin.value);
     
   }
 
@@ -45,17 +45,39 @@ export class LoginComponent {
     // })
 
     this.formularioLogin = this.fb.group({
-      usuario: ['', [Validators.required, Validators.minLength(6)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      usuario: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(4)]]
     })
   }
 
-  ValidarLogin(){
-    const {usuario,password} = this.formularioLogin.value;
-    this.authService.enviarCredenciales(usuario,password)
-      .subscribe(responseOk=>{
-        console.log("Sesión iniciada correctamente");
-        this.router.navigate(['/home'])
+  validarLogin(){
+
+    // console.log('Usuario',this.formularioLogin.value.usuario);
+    this.usuario = this.formularioLogin.value.usuario;
+    this.pass =  this.formularioLogin.value.password;
+
+    console.log(this.usuario, this.pass);
+    
+    
+    // const {usuario,password} = this.formularioLogin.value;
+    this.authService.enviarCredenciales(this.usuario,this.pass)
+      .subscribe(res=>{  
+
+        console.log(res);
+        console.log(res.clave, this.usuario);
+        console.log(res.password, this.pass);
+        
+        
+
+        if(res.clave == this.usuario && res.password == this.pass){
+          console.log(res.password);
+          console.log("Sesión iniciada correctamente");
+          this.router.navigate(['/home'])
+
+        }else{
+          console.log('Error al acceder al sistema de GYS');
+        }
+        
       },error=>{
         console.log("Error al iniciar sesión");
       })

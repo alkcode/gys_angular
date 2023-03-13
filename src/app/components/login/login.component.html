@@ -30,7 +30,7 @@
                                             <!-- <a href="index.html" class="btn btn-block btn-primary">
                                                 Ingresar
                                             </a> -->
-                                            <input type="submit" [disabled]="formularioLogin.invalid" class="btn btn-block btn-primary" value="Ingresar">
+                                            <input type="submit" (click)="validarLogin()" [disabled]="formularioLogin.invalid" class="btn btn-block btn-primary" value="Ingresar">
                                         </div>
                                     </form>
                                 </div>
