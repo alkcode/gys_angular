@@ -23,6 +23,8 @@ import { CommonModule } from '@angular/common';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 import { CheckComponent } from './components/check/check.component';
+import { OpcionesComponent } from './components/opciones/opciones.component';
+import { PerfilesComponent } from './components/perfiles/perfiles.component';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { CheckComponent } from './components/check/check.component';
     ObjToArrayPipe,
     UsuariosComponent,
     EditarUsuarioComponent,
-    CheckComponent
+    CheckComponent,
+    OpcionesComponent,
+    PerfilesComponent
   ],
   imports: [
     BrowserModule,

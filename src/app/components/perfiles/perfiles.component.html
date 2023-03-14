@@ -1,0 +1,64 @@
+<!-- <p>perfiles works!</p> -->
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-lg-10 col-md-10 container-fluid mt-5">
+            <h2 class="text-center mt-3">Crear perfil</h2>
+
+            <div class="container mt-5">
+
+                <form [formGroup]="formPerfil">
+                    
+                    <div class="form-row pb-5 mt-2">
+                        <div class="form-group col-md-12">
+                            <label>Descripción:</label>  
+                        </div>
+                        <input name="descripcion" placeholder="Escribe una descripción" class="form-control">
+                    </div>
+
+                    <!-- <div *ngFor="let opcion of opcionesArray.controls; let i = index;" class="mt-4">
+                    <select class="form-select" [formControl]="selectOpc" aria-label="Default select example">
+                                            
+                        <select class="form-select" aria-label="Default select example" (change)="enviarValores($event)">
+                            <option [ngValue]="0" disabled class="text-center">Asigne una opción</option>
+                            <option *ngFor="let opc of listaOpciones" [ngValue]="opc">{{opc.descripcion}}</option>
+                        </select>
+                    </div>  -->
+
+                    <div class="form-row pb-5 mt-2">
+                        <h3 class="text-center">Opciones del perfil</h3>
+                        <div formArrayName="opciones">
+                            <div *ngFor="let opcion of opcionesArray.controls; let i = index;" class="mt-4">
+                                <div [formGroupName]="i">
+                                    <p><strong>Opción {{i+1}}</strong></p>
+                                    <div class="form-row mb-2 mt-2">
+                                        <!-- <select class="form-select" formControlName="idOpcion" aria-label="Default select example"> -->
+                                            
+                                        <select class="form-select" aria-label="Default select example" (change)="enviarValores($event)">
+                                            <option [ngValue]="0" disabled class="text-center">Asigne una opción</option>
+                                            <option *ngFor="let opc of listaOpciones" [ngValue]="opc">{{opc.descripcion}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger" (click)="removeOpcion(i)">Quitar opcion</button>    
+                                <!-- <button class="btn btn-primary" (click)="addOpcion()"> + Añadir opcion</button> -->
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" (click)="addOpcion()"> + Añadir opcion</button> 
+                    <button type="submit" class="btn btn-success" (click)="savePerfil()">Enviar</button>
+                </form>
+            </div>
+        </div>
+
+        {{formPerfil.valid}}
+
+        <pre>
+            {{formPerfil.value | json}}
+        </pre>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<!-- <p>opciones works!</p> -->
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-lg-10 col-md-10 container-fluid mt-5">
+
+            <h2 class="text-center">Crear opcion para perfil</h2>
+
+            <form [formGroup]="formOpcion">
+
+                <!-- <div class="form-row pb-2">
+                    <div class="form-group col-md-12">
+                        <label>Nombre:</label>
+                        <input type="text" class="form-control" name="nombre" minlength="1" maxlength="50"
+                            placeholder="Ingrese el nombre" required>
+                    </div>
+                </div> -->
+
+                <div class="form-row pb-2">
+                    <div class="form-group col-md-12">
+                        <label class="mb-3">Descripción:</label>
+                        <input type="text" class="form-control mb-3" name="descripcion" minlength="1"
+                            maxlength="180" placeholder="Ingrese una Descripción" formControlName="descripcion">
+                    </div>
+                </div>
+
+                <div class="form-row pb-5">
+                    <div class="form-group col-md-12">
+                        <label class="mb-3">Componente:</label>
+                        <input type="text" class="form-control" name="componente" minlength="1"
+                            maxlength="80" placeholder="Ingrese el nombre del componente" formControlName="componente">
+                    </div>
+                    <!-- <div class="form-group col-md-6">
+                        <label>Tipo:</label>
+                        <input type="number" min="1" class="form-control" name="tipo"
+                            placeholder="Ingrese el tipo" required>
+                    </div> -->
+                </div>
+                <button (click)="saveOpcion()" type="submit" class="btn btn-success">Enviar</button>
+
+            </form>
+
+            <pre>
+                {{formOpcion.value | json}}
+            </pre>
+
+        </div>
+    </div>
+</div>

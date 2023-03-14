@@ -6,6 +6,8 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
 import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { OpcionesComponent } from './components/opciones/opciones.component';
+import { PerfilesComponent } from './components/perfiles/perfiles.component';
 import { RegistroBolsaTrabajoComponent } from './components/registro-bolsa-trabajo/registro-bolsa-trabajo.component';
 import { RegistroGuardiasComponent } from './components/registro-guardias/registro-guardias.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
@@ -20,7 +22,9 @@ const routes: Routes = [
   {path:'usuarios', component:UsuariosComponent},
   {path:'check', component:CheckComponent},
   {path:'modificar-usuario/:id', component:EditarUsuarioComponent},
-  {path:'**', redirectTo:'home'}
+  {path:'crear-opcion', component:OpcionesComponent},
+  {path:'crear-perfil', component:PerfilesComponent},
+  {path:'**', redirectTo:'auth'}
 ];
 
 @NgModule({
