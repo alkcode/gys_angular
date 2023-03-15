@@ -24,6 +24,10 @@ export class PerfilService {
       const llenarSelect$= this.http.get<any>(`${this.url}opciones`)
       return llenarSelect$;
   }
+
+  savePerfil(perfil:Perfil):Observable<Perfil>{
+    return this.http.post<Perfil>(`${this.url}perfiles`,perfil);
+  }
    
 
 

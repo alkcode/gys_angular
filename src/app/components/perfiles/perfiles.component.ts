@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Opcion } from 'src/app/interfaces/opcion';
+import { Opcion, OpcionClass } from 'src/app/interfaces/opcion';
+import { Perfil, PerfilClass } from 'src/app/interfaces/perfiles';
 import { PerfilService } from 'src/app/services/perfil.service';
 
 @Component({
@@ -10,60 +11,48 @@ import { PerfilService } from 'src/app/services/perfil.service';
 })
 export class PerfilesComponent {
 
-  // formPerfil: FormGroup = new FormGroup({});
-
   listaOpciones: Opcion[] = [];
+  opcionSeleccionada: Opcion = new OpcionClass;
+  crearPerfil: Perfil = new PerfilClass
 
   constructor(private fb: FormBuilder,
               private perfilService:PerfilService){}
 
   ngOnInit(){
-    // this.formulario();
     this.llenarSelect();
     console.log(this.opcionesArray.controls);
     
   }
 
-  // formulario(){
-  //   this.formPerfil = this.fb.group({
-  //     descripcion:['',[Validators.required]],
-  //     opciones: this.fb.array([
-  //       // this.fb.group({
-  //       //   idOpcion:this.fb.control(0,Validators.required)
-  //       // })
-  //     ])
-  //   })
-  // }
-
   formPerfil: FormGroup = this.fb.group({
-        descripcion:['',[Validators.required]],
-      opciones: this.fb.array([
-        // this.fb.group({
-        //   idOpcion:this.fb.control(0,Validators.required)
-      ])
+      descripcion:['',[Validators.required, Validators.minLength(4)]],
+      opciones: this.fb.array([])
   });
 
-  selectOpc:FormControl = this.fb.control('', Validators.required );
-
-  
+  selectOpc:FormControl = this.fb.control(0, Validators.min(1));
 
   get opcionesArray(): FormArray{   
+    console.log(this.formPerfil.get('opciones') as FormArray);
+        
     return this.formPerfil.get('opciones') as FormArray;
   }
 
-  addOpcion(){
-
+  addOpcion(opc:Opcion){
+    console.log(opc);
+    this.opcionSeleccionada = opc;
+    
     const opciones=  this.fb.group({
       
-      idOpcion:this.fb.control(0,Validators.required),
-      descripcion:this.fb.control(0, Validators.required),
-      componente:this.fb.control('', Validators.required),
-      idNivelAcceso:this.fb.control(0, Validators.required)
+      idOpcion:this.fb.control(this.opcionSeleccionada.idOpcion,[Validators.required]),
+      descripcion:this.fb.control(this.opcionSeleccionada.descripcion, [Validators.required]),
+      componente:this.fb.control(this.opcionSeleccionada.componente, [Validators.required]),
+      idNivelAcceso:this.fb.control(this.opcionSeleccionada.idNivelAcceso, [Validators.required])
 
     });
+    
 
     this.opcionesArray.push(opciones);
-
+    this.selectOpc.reset();
   }
 
   removeOpcion(i:number){
@@ -84,15 +73,17 @@ export class PerfilesComponent {
   }
 
   savePerfil(){
+    this.crearPerfil = this.formPerfil.value;
+    console.log(this.crearPerfil);
 
-    if(this.formPerfil.valid){
-      console.log(this.formPerfil.value);
-    }
-    
-  }
-
-  enviarValores($e:any){
-    console.log($e);
+    // this.perfilService.savePerfil(this.crearPerfil)
+    //     .subscribe(res=>{
+    //       console.log('Perfil creado', res);
+          
+    //     },err=>{
+    //       console.log(err);
+          
+    //     });
     
   }
 }
