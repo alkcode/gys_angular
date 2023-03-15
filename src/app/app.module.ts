@@ -25,6 +25,7 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
 import { CheckComponent } from './components/check/check.component';
 import { OpcionesComponent } from './components/opciones/opciones.component';
 import { PerfilesComponent } from './components/perfiles/perfiles.component';
+import { MostrarOpcionesComponent } from './components/mostrar-opciones/mostrar-opciones.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { PerfilesComponent } from './components/perfiles/perfiles.component';
     EditarUsuarioComponent,
     CheckComponent,
     OpcionesComponent,
-    PerfilesComponent
+    PerfilesComponent,
+    MostrarOpcionesComponent
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,8 @@
         </div>
         <div class="col-lg-10 col-md-10 container-fluid mt-5">
 
-            <h2 class="text-center">Crear opcion para perfil</h2>
+            <!-- <h2 class="text-center">Crear opcion para perfil</h2> -->
+            <h2 class="text-center">{{titulo}}</h2>
 
             <form [formGroup]="formOpcion">
 
@@ -40,7 +41,7 @@
                             placeholder="Ingrese el tipo" required>
                     </div> -->
                 </div>
-                <button (click)="saveOpcion()" type="submit" class="btn btn-success">Enviar</button>
+                <button (click)="edit ? editOpcion():saveOpcion()" type="submit" class="btn btn-success" [disabled]="formOpcion.invalid">Enviar</button>
 
             </form>
 

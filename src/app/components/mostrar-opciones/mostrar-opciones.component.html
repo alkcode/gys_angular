@@ -1,0 +1,42 @@
+<!-- <p>mostrar-opciones works!</p> -->
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-lg-10 col-md-10 container-fluid mt-5">
+
+            <h2 class="text-center">Mostrar opciones</h2>
+
+            <div class="table-responsive">
+                <table class="table mt-5">
+                    <thead class="text-center">
+                    <tr>
+                        <th scope="col">No. Opcion</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Componente</th>
+                        <th scope="col">Modificar</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr *ngFor="let opcion of listOpciones; index as i;">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{opcion.descripcion}}</td>
+                            <td>{{opcion.componente}}</td>
+                            <td><a [routerLink]="['/editar-opcion',opcion.idOpcion]" class="btn btn-warning">Modificar</a></td>
+                            <td><a (click)="borrarOpcion(opcion.idOpcion)" class="btn btn-danger">Eliminar</a></td>
+                            <!-- <td>@mdo</td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-5">
+                <a class="btn btn-success" [routerLink]="['/crear-opcion']">Crear nueva opcion</a>
+            </div>
+        </div>
+    </div>
+</div>
