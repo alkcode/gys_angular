@@ -7,6 +7,7 @@ import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MostrarOpcionesComponent } from './components/mostrar-opciones/mostrar-opciones.component';
+import { MostrarPerfilesComponent } from './components/mostrar-perfiles/mostrar-perfiles.component';
 import { OpcionesComponent } from './components/opciones/opciones.component';
 import { PerfilesComponent } from './components/perfiles/perfiles.component';
 import { RegistroBolsaTrabajoComponent } from './components/registro-bolsa-trabajo/registro-bolsa-trabajo.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path:'editar-opcion/:id', component: OpcionesComponent},
   {path:'mostrar-opciones', component:MostrarOpcionesComponent},
   {path:'crear-perfil', component:PerfilesComponent},
+  {path:'mostrar-perfiles', component:MostrarPerfilesComponent},
   {path:'**', redirectTo:'auth'}
 ];
 

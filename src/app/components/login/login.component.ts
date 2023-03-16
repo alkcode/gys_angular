@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/interfaces/User';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -61,21 +62,22 @@ export class LoginComponent {
     
     // const {usuario,password} = this.formularioLogin.value;
     this.authService.enviarCredenciales(this.usuario,this.pass)
-      .subscribe(res=>{  
+      .subscribe((res : User)=>{  
 
         console.log(res);
         console.log(res.clave, this.usuario);
         console.log(res.password, this.pass);
-        
-        
 
-        if(res.clave == this.usuario && res.password == this.pass){
-          console.log(res.password);
-          console.log("Sesión iniciada correctamente");
-          this.router.navigate(['/home'])
+        if(res!==null){
 
-        }else{
-          console.log('Error al acceder al sistema de GYS');
+          if(res.clave == this.usuario && res.password == this.pass){
+            console.log(res.password);
+            console.log("Sesión iniciada correctamente");
+            this.router.navigate(['/home'])
+  
+          }else{
+            console.log('Usuario y/o contraseña incorrectos');
+          }
         }
         
       },error=>{

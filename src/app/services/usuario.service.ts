@@ -35,7 +35,7 @@ export class UsuarioService {
     return this.http.put<Usuario>(`${this.url}usuarios/${id}`, usuario);
   }
 
-  deleteUsuario(id:Number,usuario:Usuario):Observable<Usuario>{
+  deleteUsuario(id:Number):Observable<Usuario>{
     return this.http.delete<Usuario>(`${this.url}usuarios/${id}`);
   }
 

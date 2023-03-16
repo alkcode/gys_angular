@@ -26,6 +26,7 @@ import { CheckComponent } from './components/check/check.component';
 import { OpcionesComponent } from './components/opciones/opciones.component';
 import { PerfilesComponent } from './components/perfiles/perfiles.component';
 import { MostrarOpcionesComponent } from './components/mostrar-opciones/mostrar-opciones.component';
+import { MostrarPerfilesComponent } from './components/mostrar-perfiles/mostrar-perfiles.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { MostrarOpcionesComponent } from './components/mostrar-opciones/mostrar-
     CheckComponent,
     OpcionesComponent,
     PerfilesComponent,
-    MostrarOpcionesComponent
+    MostrarOpcionesComponent,
+    MostrarPerfilesComponent
   ],
   imports: [
     BrowserModule,

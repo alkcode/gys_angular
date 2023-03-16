@@ -32,8 +32,7 @@ export class PerfilesComponent {
   selectOpc:FormControl = this.fb.control(0, Validators.min(1));
 
   get opcionesArray(): FormArray{   
-    console.log(this.formPerfil.get('opciones') as FormArray);
-        
+    // console.log(this.formPerfil.get('opciones') as FormArray);
     return this.formPerfil.get('opciones') as FormArray;
   }
 
@@ -52,7 +51,8 @@ export class PerfilesComponent {
     
 
     this.opcionesArray.push(opciones);
-    this.selectOpc.reset();
+    this.selectOpc.reset(0);
+
   }
 
   removeOpcion(i:number){
@@ -73,6 +73,11 @@ export class PerfilesComponent {
   }
 
   savePerfil(){
+    if(this.opcionesArray.length == 0){
+      console.log('No hay opciones asignadas');
+      return;
+    }
+
     this.crearPerfil = this.formPerfil.value;
     console.log(this.crearPerfil);
 

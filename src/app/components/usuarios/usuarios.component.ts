@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { environment } from 'src/environments/environment';
@@ -11,7 +12,8 @@ import { environment } from 'src/environments/environment';
 export class UsuariosComponent {
 
   usuarios:Usuario[] = [];
-  constructor(private usuarioService:UsuarioService) { }
+  constructor(private usuarioService:UsuarioService,
+              private router: Router) { }
 
   ngOnInit(){
     this.mostrarUsuarios();
@@ -28,14 +30,16 @@ export class UsuariosComponent {
     });
   }
 
-  // editUsuario(id:any){
-  //   console.log(id);
-    
-  // }
 
-  // deleteUsuario(id:any){
-  //   console.log(id);
-    
-  // }
+  deleteUsuario(id:any){
+    console.log(id);
+    this.usuarioService.deleteUsuario(id)
+        .subscribe(res=>{
+          console.log(res);
+          this.mostrarUsuarios();
+        }, err=>{
+          console.log(err);
+        });
+  }
 
 }

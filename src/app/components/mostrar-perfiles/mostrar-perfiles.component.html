@@ -1,4 +1,4 @@
-<!-- <p>mostrar-opciones works!</p> -->
+<!-- <p>mostrar-perfiles works!</p> -->
 <app-header></app-header>
 
 <div class="container-fluid">
@@ -14,28 +14,31 @@
                 <table class="table table-hover mt-5">
                     <thead class="text-center">
                     <tr>
-                        <th scope="col">No. Opcion</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Id perfil</th>
                         <th scope="col">Descripcion</th>
-                        <th scope="col">Componente</th>
                         <th scope="col">Modificar</th>
                         <th scope="col">Eliminar</th>
                     </tr>
                     </thead>
                     <tbody class="text-center">
-                        <tr *ngFor="let opcion of listOpciones; index as i;">
+                        <tr *ngFor="let perfil of listPerfiles; index as i;">
                             <th scope="row">{{i+1}}</th>
-                            <td>{{opcion.descripcion}}</td>
-                            <td>{{opcion.componente}}</td>
-                            <td><a [routerLink]="['/editar-opcion',opcion.idOpcion]" class="btn btn-warning">Modificar</a></td>
-                            <td><a (click)="borrarOpcion(opcion.idOpcion)" class="btn btn-danger">Eliminar</a></td>
+                            <td>{{perfil.idPerfil}}</td>
+                            <td>{{perfil.descripcion}}</td>
+                            
+                            <!-- <td><a [routerLink]="['/editar-opcion',perfil.idPerfil]" class="btn btn-warning">Modificar</a></td> -->
+                            <td><a (click)="borrarPerfil(perfil.idPerfil)" class="btn btn-danger">Eliminar</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="mt-5">
-                <a class="btn btn-success" [routerLink]="['/crear-opcion']">Crear nueva opcion</a>
+                <a class="btn btn-success" [routerLink]="['/crear-perfil']">Crear nuevo perfil</a>
             </div>
+
+
         </div>
     </div>
 </div>
